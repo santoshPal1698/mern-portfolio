@@ -1,5 +1,6 @@
 import { lazy } from "react";
 const Home = lazy(() => import("../Components/Home"));
+const vihanLanding = lazy(() => import("../Components/LandingPage/Viahaantechlanding"));
 // import ProtectedRoute from "../Protected/ProtectedRoute";
 const Admin = lazy(() => import("../Components/sections/Admin"));
 const Login = lazy(() => import("../Components/sections/Admin/Login"));
@@ -8,30 +9,39 @@ const PageNotFound = lazy(() => import("../Components/PageNotFound"));
 const travelers = lazy(() => import("../Components/Tour-Travels/Vihan"));
 
 const allRoutes = [
-    {
-        path: "/",
-        element: Home
-    },
-    {
-        path: "/weather",
-        element: Weather,
-    },
-    {
-        path: "/dv-travels",
-        element: travelers,
-    },
+  {
+    path: "/",
+    element: Home,
+  },
 
-    {
-        path: "/login",
-        element: Login,
-    },
+  {
+    path: "/vihaan",
+    element: vihanLanding,
+  },
+  {
+    path: "/user/:name",
+    element: Home,
+  },
+  {
+    path: "/weather",
+    element: Weather,
+  },
+  {
+    path: "/dv-travels",
+    element: travelers,
+  },
 
-    { path: "/admin-dashboard", element: Admin, protected: true },
+  {
+    path: "/login",
+    element: Login,
+  },
 
-    {
-        path: "*",
-        element: PageNotFound,
-    },
+  { path: "/admin-dashboard", element: Admin, protected: true },
+
+  {
+    path: "*",
+    element: PageNotFound,
+  },
 ];
 
 export default allRoutes;

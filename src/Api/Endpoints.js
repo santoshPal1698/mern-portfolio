@@ -8,7 +8,7 @@ export const ENDPOINTS = {
 
 export const PORTFOLIOPOINTS = {
     ApiBaseUrl:'https://sptech-api-v1.onrender.com/api/v1/',
-    // ApiBaseUrl:'http://localhost:5000/api/v1/'
+    // ApiBaseUrl:'http://localhost:8000/api/v1/'
 
 }
 

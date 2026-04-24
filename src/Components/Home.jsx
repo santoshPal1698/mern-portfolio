@@ -1,5 +1,5 @@
 import styled, { ThemeProvider } from "styled-components";
-import React from 'react'
+import React, { useState } from "react";
 import Hero from "./sections/Hero";
 import Skills from "./sections/Skills";
 import Experience from "./sections/Experience";
@@ -9,7 +9,9 @@ import Education from "./sections/Education";
 import Footer from "./sections/Footer";
 import { useSelector } from "react-redux";
 import Spin_loader from "./Spin-loader";
-
+import AIChatbot from "./AI/AIChatbot";
+import Navbar from "./Navbar";
+import { darkTheme, lightTheme } from "../utils/Themes";
 
 const Body = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -20,7 +22,8 @@ const Body = styled.div`
 
 const Wrapper = styled.div`
   padding-bottom: 100px;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       38.73deg,
       rgba(204, 0, 187, 0.15) 0%,
       rgba(201, 32, 184, 0) 50%
@@ -34,31 +37,39 @@ const Wrapper = styled.div`
   clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 98%, 0 100%);
 `;
 
-
 const Home = () => {
-
   const { loading, portfolioData } = useSelector((state) => state.root);
+  const [theme, setTheme] = useState("dark");
+  const themeToggler = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   return (
     <>
-      {loading ? <Spin_loader /> : null}
-      {portfolioData && (<div>
-        <Body>
-          <Hero />
-          <Wrapper>
-            <Skills />
-            <Experience />
-          </Wrapper>
-          <Projects />
-          <Wrapper>
-            <Education />
-            {/* <Contact /> */}
-          </Wrapper>
-          <Footer />
-        </Body>
-      </div>)}
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <Navbar theme={theme} toggleThemeControl={themeToggler} />
+        {loading ? <Spin_loader /> : null}
+        {portfolioData && (
+          <div>
+            <AIChatbot />
+            <Body>
+              <Hero />
+              <Wrapper>
+                <Skills />
+                <Experience />
+              </Wrapper>
+              <Projects />
+              <Wrapper>
+                <Education />
+                {/* <Contact /> */}
+              </Wrapper>
+              <Footer />
+            </Body>
+          </div>
+        )}
+      </ThemeProvider>
     </>
-  )
-}
+  );
+};
 
 export default Home;

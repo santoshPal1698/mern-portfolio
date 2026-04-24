@@ -225,7 +225,7 @@ const GlobalStyles = createGlobalStyle`
   .footer-copy{width:100%;text-align:center;margin-top:20px;padding-top:20px;border-top:1px solid rgba(212,160,23,0.1);font-size:0.82rem;font-family:'Hind',sans-serif;}
 
   /* FABs */
-  .whatsapp-fab{position:fixed;bottom:90px;right:28px;z-index:999;width:52px;height:52px;background:#25D366;border:none;border-radius:50%;color:white;font-size:1.65rem;cursor:pointer;box-shadow:0 6px 18px rgba(37,211,102,0.38);transition:all 0.3s;display:flex;align-items:center;justify-content:center;animation:pulse 2.2s ease infinite;}
+  .whatsapp-fab{position:fixed;bottom:70px;right:0px;z-index:999;width:52px;height:52px;background:#25D366;border:none;border-radius:50%;color:white;font-size:1.65rem;cursor:pointer;box-shadow:0 6px 18px rgba(37,211,102,0.38);transition:all 0.3s;display:flex;align-items:center;justify-content:center;animation:pulse 2.2s ease infinite;}
   .whatsapp-fab:hover{transform:scale(1.12);}
   .scroll-top{position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;background:linear-gradient(135deg,var(--saffron),var(--gold));border:none;border-radius:50%;color:white;font-size:1.25rem;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,0,0.38);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
   .scroll-top:hover{transform:translateY(-4px);}

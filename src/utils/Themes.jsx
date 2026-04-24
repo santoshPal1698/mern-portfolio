@@ -23,3 +23,19 @@ export const lightTheme = {
   black: "#000000",
   card_light: "#ffff",
 };
+
+// ─── THEME ───────────────────────────────────────────────────────────────────
+export const theme = {
+  bg:       "#060b14",
+  bg2:      "#0b1220",
+  bg3:      "#0f1a2e",
+  card:     "rgba(15,26,52,0.85)",
+  border:   "rgba(0,200,255,0.15)",
+  cyan:     "#00c8ff",
+  blue:     "#0075ff",
+  violet:   "#7c3aed",
+  gold:     "#f59e0b",
+  white:    "#f0f6ff",
+  muted:    "#7a90b0",
+  gradient: "linear-gradient(135deg, #00c8ff 0%, #0075ff 50%, #7c3aed 100%)",
+};
