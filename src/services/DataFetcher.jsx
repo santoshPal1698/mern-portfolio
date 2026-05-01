@@ -13,7 +13,7 @@ const DataFetcher = () => {
   const pathParts = location.pathname.split("/"); // ['', 'user', 'yogesh']
   // const name = pathParts[1] ;
   const name = pathParts[1] === "user" ? pathParts[2] : undefined;
-  console.log("Extracted name from URL:", name,pathParts[1]);
+  // console.log("Extracted name from URL:", name,pathParts[1]);
 
   useEffect(() => {
     if (!portfolioData || reloadData) {

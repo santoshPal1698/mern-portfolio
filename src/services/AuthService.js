@@ -11,7 +11,7 @@ const getUserData = () => {
       // Parse and return the complete user data object
       return JSON.parse(userData);
     } catch (error) {
-      console.error("Error fetching user data from localStorage:", error);
+      // console.error("Error fetching user data from localStorage:", error);
       return null; // Return null on error
     }
   };
@@ -28,7 +28,7 @@ const getUserRole = () => {
       const role = parsedUserData?.userData?.data?.roles || "GUEST";
       return role;
     } catch (error) {
-      console.error("Error fetching user role from localStorage:", error);
+      // console.error("Error fetching user role from localStorage:", error);
       return null; // Return null on error
     }
   };
@@ -49,7 +49,7 @@ const getUserRole = () => {
     try {
       localStorage.setItem("USER", JSON.stringify(userData));
     } catch (error) {
-      console.error("Error setting user data in localStorage:", error);
+      // console.error("Error setting user data in localStorage:", error);
     }
   };
   

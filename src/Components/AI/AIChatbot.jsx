@@ -386,7 +386,7 @@ const AIChatbot = () => {
         { role: "assistant", content: reply, ts: new Date() },
       ]);
     } catch (error) {
-      console.error("API Error:", error);
+      // console.error("API Error:", error);
       setMessages((prev) => [
         ...prev,
         {

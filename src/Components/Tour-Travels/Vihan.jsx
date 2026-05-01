@@ -50,7 +50,7 @@ export default function DhruvViihaanTours() {
   const handleSubmit = () => {
     if (!formData.name || !formData.phone) return;
     const msg = whatsappMsg(formData);
-    console.log("WhatsApp2 Message:", msg);
+    // console.log("WhatsApp2 Message:", msg);
     const phoneNumber = "918839102688";
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`;
     window.open(whatsappURL, "_blank");
