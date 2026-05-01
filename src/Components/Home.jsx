@@ -12,6 +12,7 @@ import Spin_loader from "./Spin-loader";
 import AIChatbot from "./AI/AIChatbot";
 import Navbar from "./Navbar";
 import { darkTheme, lightTheme } from "../utils/Themes";
+import WhatsAppWidget from "./WhatsAppWidget";
 
 const Body = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -52,6 +53,7 @@ const Home = () => {
         {portfolioData && (
           <div>
             <AIChatbot />
+            <WhatsAppWidget />
             <Body>
               <Hero />
               <Wrapper>

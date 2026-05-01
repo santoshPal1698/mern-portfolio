@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   Email,
-  FacebookRounded,
   Instagram,
   LinkedIn,
-  Twitter,
 } from "@mui/icons-material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 
 const FooterContainer = styled.div`
   width: 100%;
@@ -65,16 +65,6 @@ const SocialMediaIcons = styled.div`
   display: flex;
   margin-top: 1rem;
 `;
-const SocialMediaIcon2 = styled.a`
-  display: inline-block;
-  margin: 0 1rem;
-  font-size: 1.5rem;
-  color: ${({ theme }) => theme.text_primary};
-  transition: color 0.2s ease-in-out;
-  &:hover {
-    color: ${({ theme }) => theme.primary};
-  }
-`;
 
 const SocialMediaIcon = styled.a`
   width: 46px;
@@ -110,10 +100,11 @@ const Copyright = styled.p`
 `;
 
 const Footer = () => {
-  const { loading, portfolioData } = useSelector((state) => state.root);
-  // const [loader, setLoading] = useState(false);
+  const { portfolioData } = useSelector((state) => state.root);
   const { intro } = portfolioData;
-  const { name, github, insta, linkedin, facebook } = intro;
+  const { name, github, insta, linkedin } = intro;
+  const navigate = useNavigate();
+
   return (
     <FooterContainer>
       <FooterWrapper>
@@ -141,6 +132,9 @@ const Footer = () => {
           </SocialMediaIcon>
           <SocialMediaIcon href={insta} target="display">
             <Instagram />
+          </SocialMediaIcon>
+          <SocialMediaIcon onClick={() => navigate("/weather")}>
+            <WbSunnyIcon />
           </SocialMediaIcon>
         </SocialMediaIcons>
         <Copyright>
