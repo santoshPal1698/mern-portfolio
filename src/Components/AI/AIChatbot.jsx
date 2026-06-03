@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import axios from "axios";
 import { PORTFOLIOPOINTS } from "../../Api/Endpoints";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
 // ─── Animations ────────────────────────────────────────────────────────────────
 const fadeSlideUp = keyframes`
   from { opacity: 0; transform: translateY(24px) scale(0.96); }
@@ -332,6 +333,13 @@ const SUGGESTIONS = [
 
 // ─── Main Component ─────────────────────────────────────────────────────────────
 const AIChatbot = () => {
+
+  const {  portfolioData } = useSelector((state) => state.root);
+  const { intro } = portfolioData;
+  console.log("Intro from Redux:", intro);
+  const { name, profile_url } = intro;
+
+  
   const initialMessages = [
     {
       role: "assistant",
@@ -346,7 +354,7 @@ const AIChatbot = () => {
     {
       role: "assistant",
       // content: [{ type: "text", text: "Hey 👋 I'm Santosh's AI assistant. Ask me anything about his skills, projects, or experience!" }],
-      content: "Hey 👋 I'm Santosh's AI assistant. Ask me anything about his skills, projects, or experience!",
+      content: `Hey 👋 I'm ${name}'s AI assistant. Ask me anything about his skills, projects, or experience!`,
       ts: new Date(),
     },
   ]);
@@ -419,9 +427,10 @@ const AIChatbot = () => {
         <ChatWindow>
           {/* Header */}
           <Header>
-            <Avatar>🤖</Avatar>
+              <Avatar>🤖</Avatar>
+            {/* <Avatar>{profile_url ? <img src={profile_url} alt={name} /> : name.charAt(0)}</Avatar> */}
             <HeaderInfo>
-              <BotName>Santosh&apos;s AI</BotName>
+              <BotName>{name}&apos;AI</BotName>
               <StatusDot>Online</StatusDot>
             </HeaderInfo>
             <CloseBtn onClick={toggleChat}>✕</CloseBtn>

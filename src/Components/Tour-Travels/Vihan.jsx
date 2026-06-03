@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { content } from "./content";
 import { useLocation } from "react-router-dom";
 import { whatsappMsg } from "../../services/master.service";
-import GlobalStyles  from "./VihanStyles";
+import GlobalStyles from "./VihanStyles";
 
 const particles = Array.from({ length: 16 }, (_, i) => ({
   id: i,
@@ -15,7 +15,7 @@ const particles = Array.from({ length: 16 }, (_, i) => ({
 
 export default function DhruvViihaanTours() {
 
- const location = useLocation();
+  const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/dv-travels") {
       document.body.classList.add("hide-wa");
@@ -23,7 +23,7 @@ export default function DhruvViihaanTours() {
       document.body.classList.remove("hide-wa");
     }
   }, [location.pathname]);
-    
+
   const [lang, setLang] = useState("en");
   const [animKey, setAnimKey] = useState(0);
   const [formData, setFormData] = useState({
@@ -36,7 +36,6 @@ export default function DhruvViihaanTours() {
   const [submitted, setSubmitted] = useState(false);
 
   const t = content[lang];
-
   const switchLang = (l) => {
     if (l === lang) return;
     setLang(l);
@@ -50,8 +49,7 @@ export default function DhruvViihaanTours() {
   const handleSubmit = () => {
     if (!formData.name || !formData.phone) return;
     const msg = whatsappMsg(formData);
-    // console.log("WhatsApp2 Message:", msg);
-    const phoneNumber = "918839102688";
+    const phoneNumber = "917879572717";
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`;
     window.open(whatsappURL, "_blank");
     // Reset form
@@ -66,10 +64,10 @@ export default function DhruvViihaanTours() {
     setTimeout(() => setSubmitted(false), 4000);
   };
 
+
   return (
     <div>
-       <GlobalStyles />
-
+      <GlobalStyles />
       {/* ── LANGUAGE TOGGLE ── */}
       <div className="lang-toggle-wrap">
         <div className="lang-toggle">
@@ -91,8 +89,15 @@ export default function DhruvViihaanTours() {
 
       {/* ── CALL STRIP ── */}
       <div className="call-strip">
-        {t.callStrip}&nbsp;<a href="tel:6265370030">6265370030</a>&nbsp;
-        {t.callStrip2}
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+          {t.callStrip}&nbsp;
+          <a href="tel:6265370030">+91 6265370030</a>
+          &nbsp;&nbsp;
+          {t.callStrip1}&nbsp;
+          <a href="tel:7879572717">+91 7879572717</a>
+          &nbsp;&nbsp;
+          {t.callStrip2}
+        </marquee>
       </div>
 
       {/* ── NAVBAR ── */}
@@ -373,7 +378,7 @@ export default function DhruvViihaanTours() {
       </section>
 
       {/* ── GALLERY ── */}
-      <section className="section section-alt" id="gallery">
+      {/* <section className="section section-alt" id="gallery">
         <div className="section-header">
           <div className="section-tag">{t.galleryTag}</div>
           <h2 className="section-title">
@@ -395,10 +400,10 @@ export default function DhruvViihaanTours() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── TESTIMONIALS ── */}
-      <section className="section" style={{ background: "#FFF4E0" }}>
+      {/* <section className="section" style={{ background: "#FFF4E0" }}>
         <div className="section-header">
           <div className="section-tag">{t.testiTag}</div>
           <h2 className="section-title">
@@ -425,7 +430,7 @@ export default function DhruvViihaanTours() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── CONTACT ── */}
       <section className="contact-section" id="contact">
@@ -465,20 +470,20 @@ export default function DhruvViihaanTours() {
                   }
                 />
               </div>
-                  <div className="form-group">
-              <label className="form-label">{t.formPhone}</label>
-              <input
-                type="tel"
-                className="form-input"
-                placeholder={t.formPhonePh}
-                maxLength={10}
-                value={formData.phone}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/\D/g, ""); // only digits
-                  setFormData({ ...formData, phone: value });
-                }}
-              />
-            </div>
+              <div className="form-group">
+                <label className="form-label">{t.formPhone}</label>
+                <input
+                  type="tel"
+                  className="form-input"
+                  placeholder={t.formPhonePh}
+                  maxLength={10}
+                  value={formData.phone}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, ""); // only digits
+                    setFormData({ ...formData, phone: value });
+                  }}
+                />
+              </div>
             </div>
             <div className="form-group">
               <label className="form-label">{t.formDest}</label>
@@ -531,14 +536,14 @@ export default function DhruvViihaanTours() {
             >
               {t.formOr}&nbsp;
               <a
-                href="tel:6265370030"
+                href="tel:7879572717"
                 style={{
                   color: "#FFD700",
                   textDecoration: "none",
                   fontWeight: 700,
                 }}
               >
-                6265370030
+                +91 7879572717
               </a>
             </div>
           </div>
@@ -572,7 +577,7 @@ export default function DhruvViihaanTours() {
                 marginBottom: 3,
               }}
             >
-              {t.footerContact}
+              {t.footerContact} &nbsp; &nbsp;Neeraj Pal
             </div>
             <a
               href="tel:6265370030"
@@ -584,7 +589,7 @@ export default function DhruvViihaanTours() {
                 textDecoration: "none",
               }}
             >
-              📞 6265370030
+              📞 6265370030 &nbsp; &nbsp;7879572717
             </a>
           </div>
           <div className="footer-links">

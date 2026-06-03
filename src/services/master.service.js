@@ -19,7 +19,7 @@ export const whatsappMsg = (data) => {
     // console.log('whats app msg',data)
     const { formattedDate, formattedTime } = formatDateTime(data.date);
     return `
-    Hello Dheeraj ji,
+    Hii,
     My name is ${data.name} .
     Mobile Number is: ${data.phone}).
     I would like to inquire about the  ${data.destination ? `visit ${data.destination}` : "travel with you"}.

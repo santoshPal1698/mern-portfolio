@@ -8,6 +8,7 @@ const Weather = lazy(() => import("../Components/Weather"));
 const PageNotFound = lazy(() => import("../Components/PageNotFound"));
 const travelers = lazy(() => import("../Components/Tour-Travels/Vihan"));
 
+
 const allRoutes = [
   {
     path: "/",
@@ -30,7 +31,6 @@ const allRoutes = [
     path: "/dv-travels",
     element: travelers,
   },
-
   {
     path: "/login",
     element: Login,
