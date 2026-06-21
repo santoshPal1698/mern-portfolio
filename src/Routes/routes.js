@@ -12,13 +12,9 @@ const travelers = lazy(() => import("../Components/Tour-Travels/Vihan"));
 const allRoutes = [
   {
     path: "/",
-    element: Home,
-  },
-
-  {
-    path: "/vihaan",
     element: vihanLanding,
   },
+
   {
     path: "/user/:name",
     element: Home,
@@ -37,6 +33,11 @@ const allRoutes = [
   },
 
   { path: "/admin-dashboard", element: Admin, protected: true },
+
+  {
+    path: "/429",
+    element: PageNotFound,
+  },
 
   {
     path: "*",

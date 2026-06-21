@@ -6,22 +6,35 @@ export const darkTheme = {
   text_secondary: "#B0BEC5",
   card: "#1E1E1E",
   card_light: "#2C2C2C",
-  button: "#1565C0",
   white: "#FFFFFF",
   black: "#000000",
+
+  // Button / social icon theming
+  button: "linear-gradient(135deg, #6a11cb, #2575fc)",
+  buttonHover: "linear-gradient(135deg, #2575fc, #6a11cb)",
+  buttonText: "#FFFFFF",
+  buttonShadow: "0 10px 25px rgba(0, 0, 0, 0.35)",
+  buttonShadowHover: "0 15px 35px rgba(37, 117, 252, 0.6)",
+  bgLightDark: "#2b2d42",
 };
 
 export const lightTheme = {
-  bg: "#F9FAFB",
+  bg: "#F5F7FA",
   bgLight: "#FFFFFF",
-  primary: "#1976D2",
-  text_primary: "#212121",
-  text_secondary: "#616161",
+  primary: "#1565C0",
+  text_primary: "#121212",
+  text_secondary: "#5F6B76",
   card: "#FFFFFF",
-  button: "#0000",
-  white: "#ffffff",
+  card_light: "#E8EEF5",
+  white: "#FFFFFF",
   black: "#000000",
-  card_light: "#ffff",
+  // Button / social icon theming
+  button: "linear-gradient(135deg, #7C3AED, #DB2777)",
+  buttonHover: "linear-gradient(135deg, #DB2777, #7C3AED)",
+  buttonText: "#FFFFFF",
+  buttonShadow: "0 8px 20px rgba(124, 58, 237, 0.25)",
+  buttonShadowHover: "0 12px 28px rgba(219, 39, 119, 0.4)",
+  bgLightDark: "#f5a623",
 };
 
 

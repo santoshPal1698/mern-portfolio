@@ -27,14 +27,14 @@ const spin = keyframes`
 // ─── Styled Components ──────────────────────────────────────────────────────────
 const FloatBtn = styled.button`
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 71px;
+  right: 8px;
   z-index: 9999;
   width: 60px;
   height: 60px;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: ${({ theme }) => theme.button};
   color: #fff;
   font-size: 26px;
   cursor: pointer;
@@ -336,7 +336,6 @@ const AIChatbot = () => {
 
   const {  portfolioData } = useSelector((state) => state.root);
   const { intro } = portfolioData;
-  console.log("Intro from Redux:", intro);
   const { name, profile_url } = intro;
 
   

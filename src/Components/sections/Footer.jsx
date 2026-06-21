@@ -70,16 +70,16 @@ const SocialMediaIcon = styled.a`
   width: 46px;
   height: 46px;
   border-radius: 50%;
+  background: ${({ theme }) => theme.button};
   display: inline-block;
   margin: 0 1rem;
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: ${({ theme }) => theme.buttonText};
   transition: all 0.35s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.buttonShadow};
 
   svg {
     font-size: 22px;
@@ -87,10 +87,11 @@ const SocialMediaIcon = styled.a`
 
   &:hover {
     transform: translateY(-6px) scale(1.1);
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
-    box-shadow: 0 15px 35px rgba(37, 117, 252, 0.6);
+    background: ${({ theme }) => theme.buttonHover};
+    box-shadow: ${({ theme }) => theme.buttonShadowHover};
   }
 `;
+
 
 const Copyright = styled.p`
   margin-top: 1.5rem;

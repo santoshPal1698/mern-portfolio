@@ -7,7 +7,6 @@ import NightlightIcon from '@mui/icons-material/Nightlight';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 
-
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
   height: 80px;
@@ -77,27 +76,29 @@ const ButtonContainer = styled.div`
 `;
 
 const GithubButton = styled.a`
-background: linear-gradient(135deg, #6a11cb, #2575fc);
-color: #fff;
-  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.button};
   display: flex;
   align-items: center;
-  border-radius: 100%;
-  width: 35px;
-  height: 41px !important;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
+  justify-content: center;
+  color: ${({ theme }) => theme.buttonText};
+  transition: all 0.35s ease;
+  box-shadow: ${({ theme }) => theme.buttonShadow};
+
+  svg {
+    font-size: 22px;
+  }
+
   &:hover {
-    background: #854ce6;
-    color: ${({ theme }) => theme.text_primary};
+    transform: translateY(-6px) scale(1.1);
+    background: ${({ theme }) => theme.buttonHover};
+    box-shadow: ${({ theme }) => theme.buttonShadowHover};
   }
 `;
 
-const ToggelButton = styled.a`
+const DarkLightmodeBtn = styled.a`
   justify-content: center;
   display: flex;
   align-items: center;
@@ -110,9 +111,8 @@ const ToggelButton = styled.a`
   font-weight: 500;
   transition: all 0.3s ease-in-out;
   text-decoration: none;
-  background: ${({ theme }) => (theme === "light" ? "#fff" : "#333")};
-  color: ${({ theme }) => (theme === "light" ? "#333" : "#fff")};
-
+  background: ${({ theme }) => theme.bgLightDark};
+  color: ${({ theme }) => (theme === "light" ? "#f5a623" : "#f5f5f5")};
    @media (max-width: 768px) {
     position: absolute;
     top: -57px !important;
@@ -209,9 +209,9 @@ const Navbar = ({ theme, toggleThemeControl }) => {
               <AccountCircleIcon />
             </GithubButton>
 
-            <ToggelButton className="mx-3" onClick={toggleThemeControl}>
-              {theme === "light" ? <NightlightIcon/> : <Brightness4Icon/>}
-            </ToggelButton> 
+            <DarkLightmodeBtn className="mx-2" onClick={toggleThemeControl}>
+              {theme === "light" ? <NightlightIcon /> : <Brightness4Icon />}
+            </DarkLightmodeBtn>
           </MobileMenu>
         )}
 
@@ -219,10 +219,9 @@ const Navbar = ({ theme, toggleThemeControl }) => {
           <GithubButton className="mx-2" onClick={handleUserClick}>
             <AccountCircleIcon />
           </GithubButton>
-
-          <ToggelButton className="mx-2" onClick={toggleThemeControl}>
-            {theme === "light" ? <NightlightIcon/> : <Brightness4Icon/>}
-          </ToggelButton>
+          <DarkLightmodeBtn className="mx-2" onClick={toggleThemeControl}>
+            {theme === "light" ? <NightlightIcon /> : <Brightness4Icon />}
+          </DarkLightmodeBtn>
         </ButtonContainer>
       </NavbarContainer>
     </Nav>

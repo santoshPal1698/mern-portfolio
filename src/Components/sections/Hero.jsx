@@ -14,19 +14,20 @@ import { useSelector } from "react-redux";
 import Spin_loader from "../Spin-loader";
 import { Email,LinkedIn} from "@mui/icons-material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import WorkIcon from "@mui/icons-material/Work";
 import DownloadIcon from "@mui/icons-material/Download";
 
 const SocialLink = styled.a`
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: ${({ theme }) => theme.button};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: ${({ theme }) => theme.buttonText};
   transition: all 0.35s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.buttonShadow};
 
   svg {
     font-size: 22px;
@@ -34,8 +35,8 @@ const SocialLink = styled.a`
 
   &:hover {
     transform: translateY(-6px) scale(1.1);
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
-    box-shadow: 0 15px 35px rgba(37, 117, 252, 0.6);
+    background: ${({ theme }) => theme.buttonHover};
+    box-shadow: ${({ theme }) => theme.buttonShadowHover};
   }
 `;
 
@@ -137,7 +138,7 @@ const TextLoop = styled.div`
 
 const Span = styled.div`
   cursor: pointer;
-  color: #8A2BE2;
+  color: ${({ theme }) => (theme === "light" ? "#f5a623" : "#8A2BE2")};
   text-transform: uppercase;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 `;
@@ -163,13 +164,12 @@ const ResumeButton = styled.a`
   -moz-appearance: button;
   appearance: button;
   text-decoration: none;
-
   width: 95%;
   max-width: 130px;
   text-align: center;
   padding: 6px 0;
-background: linear-gradient(135deg, #6a11cb, #2575fc);
-color:white;
+  background: ${({ theme }) => theme.button};
+  color:white;
   border-radius: 50px;
   font-weight: 600;
   font-size: 20px;
@@ -177,7 +177,7 @@ color:white;
      &:hover {
         transform: scale(1.05);
     transition: all 0.4s ease-in-out;
-    box-shadow:  20px 20px 60px #1F2634,
+    box-shadow: ${({ theme }) => theme.buttonShadow};
     filter: brightness(1);
     }    
     
@@ -236,9 +236,8 @@ const SocialIcons = styled.div`
 
 const Hero = () => {
   const { loading, portfolioData } = useSelector((state) => state.root);
-  // const [loader, setLoading] = useState(false);
   const { intro } = portfolioData;
-  const { name, description, roles, resume, profile_url } = intro;
+  const { name, description, roles, resume, profile_url,linkedin,github } = intro;
 
   return (
     <div id="About">
@@ -287,7 +286,7 @@ const Hero = () => {
                 
                 <SocialIcons>
                 <SocialLink
-                  href="https://www.linkedin.com/in/santosh-pal-6a171a1a3/"
+                  href={linkedin}
                   target="_blank"
                   aria-label="LinkedIn"
                 >
@@ -295,7 +294,15 @@ const Hero = () => {
                 </SocialLink>
 
                 <SocialLink
-                  href="https://github.com/sptechguru"
+                  href="https://www.naukri.com/mnjuser/homepage"
+                  target="_blank"
+                  aria-label="LinkedIn"
+                >
+                  <WorkIcon />
+                </SocialLink>
+
+                <SocialLink
+                  href={github}
                   target="_blank"
                   aria-label="GitHub"
                 >
@@ -310,9 +317,6 @@ const Hero = () => {
                 </SocialLink>
               </SocialIcons>
               </motion.div>
-
-              {/* Social Media Icons */}
-  
             </HeroRightContainer>
           </HeroInnerContainer>
         </motion.div>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 // Styled Components
 const Container = styled.div`
@@ -42,16 +42,26 @@ const Button = styled.button`
 `;
 
 const PageNotFound = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const is429 = location.pathname === "/429";
 
-    return (
-        <Container>
-            <Title>404</Title>
-            <Subtitle>Page Not Found</Subtitle>
-            <Text>The page you are looking for does not exist.</Text>
-            <Button onClick={() => navigate("/")}>Go Home</Button>
-        </Container>
-    );
+  return (
+    <Container>
+      <Title>{is429 ? "404" : "404"}</Title>
+      <Subtitle>
+        {is429 ? "User Not Found ??" : "Page Not Found"}
+      </Subtitle>
+
+      <Text>
+        {is429 ? "Got To Home Page ." : "The page you are looking for does not exist."}
+      </Text>
+
+      <Button onClick={() => navigate("/")}>
+        Go Home
+      </Button>
+    </Container>
+  );
 };
 
 export default PageNotFound;

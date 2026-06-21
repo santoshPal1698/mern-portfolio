@@ -1,24 +1,23 @@
 export const formatDateTime = (dateValue) => {
-    const dateObj = new Date(dateValue);
+  const dateObj = new Date(dateValue);
 
-    const formattedDate = dateObj.toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-    });
+  const formattedDate = dateObj.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
-    const formattedTime = dateObj.toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-    });
+  const formattedTime = dateObj.toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
-    return { formattedDate, formattedTime };
+  return { formattedDate, formattedTime };
 };
 
 export const whatsappMsg = (data) => {
-    // console.log('whats app msg',data)
-    const { formattedDate, formattedTime } = formatDateTime(data.date);
-    return `
+  const { formattedDate, formattedTime } = formatDateTime(data.date);
+  return `
     Hii,
     My name is ${data.name} .
     Mobile Number is: ${data.phone}).
@@ -32,4 +31,22 @@ export const whatsappMsg = (data) => {
 
     Thank You,  
     ${data.name}`;
+};
+
+export const whatsappMsgFreeLance = (data) => {
+  return `
+    Hi,
+     I would like to discuss a project with you.
+     Client Details:
+     Name: ${data.name}
+     Email: ${data.email}
+     Phone: ${data.phone}
+     Service Required:${data.service}
+     Project Requirement:${data.message}
+
+    Please let me know your availability for a discussion.
+
+    Thank You,
+    ${data.name}
+    `;
 };
