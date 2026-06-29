@@ -27,8 +27,8 @@ const spin = keyframes`
 // ─── Styled Components ──────────────────────────────────────────────────────────
 const FloatBtn = styled.button`
   position: fixed;
-  bottom: 71px;
-  right: 8px;
+  bottom: 28px;
+  right: 25px;
   z-index: 9999;
   width: 60px;
   height: 60px;

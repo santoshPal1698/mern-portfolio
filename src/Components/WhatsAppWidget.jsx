@@ -18,7 +18,7 @@ const WhatsAppWidget = () => {
                 marginLeft: "0",
                 marginBottom: "20",
                 marginRight: "50",
-                position: "right",
+                position: "left",
             },
             brandSetting: {
                 brandName: "SANTOSH PAL",
