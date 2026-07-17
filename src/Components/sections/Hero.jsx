@@ -12,10 +12,11 @@ import {
 import StarCanvas from "../canvas/Stars";
 import { useSelector } from "react-redux";
 import Spin_loader from "../Spin-loader";
-import { Email,LinkedIn} from "@mui/icons-material";
+import { Email, LinkedIn } from "@mui/icons-material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import WorkIcon from "@mui/icons-material/Work";
 import DownloadIcon from "@mui/icons-material/Download";
+import { isSantoshPortfolio } from "../../services/AuthService";
 
 const SocialLink = styled.a`
   width: 46px;
@@ -237,17 +238,25 @@ const SocialIcons = styled.div`
 const Hero = () => {
   const { loading, portfolioData } = useSelector((state) => state.root);
   const { intro } = portfolioData;
-  const { name, description, roles, resume, profile_url,linkedin,github } = intro;
+  console.log("portfolio data", portfolioData)
+  const { name, description, roles, resume, profile_url, linkedin, github } = intro;
 
   return (
     <div id="About">
       {loading ? <Spin_loader /> : null}
       <HeroContainer>
         <HeroBg>
-          <StarCanvas />
-          <HeroBgAnimation />
-        </HeroBg>
 
+          {
+            isSantoshPortfolio(portfolioData) && (
+              <>
+                <StarCanvas />
+                <HeroBgAnimation />
+              </>
+            )
+          }
+
+        </HeroBg>
         <motion.div {...headContainerAnimation}>
           <HeroInnerContainer>
             <HeroLeftContainer>
@@ -279,49 +288,49 @@ const Hero = () => {
 
             <HeroRightContainer>
               <motion.div {...headContentAnimation}>
-                  <Tilt tiltMaxAngleX={25} tiltMaxAngleY={25} 
+                <Tilt tiltMaxAngleX={25} tiltMaxAngleY={25}
                   scale={1.05} transitionSpeed={3000} glareEnable={true} glareMaxOpacity={0.45}>
-                    <Img src={profile_url} alt="Santosh Pal" />
-                  </Tilt>
-                
+                  <Img src={profile_url} alt="Santosh Pal" />
+                </Tilt>
+
                 <SocialIcons>
-                <SocialLink
-                  href={linkedin}
-                  target="_blank"
-                  aria-label="LinkedIn"
-                >
-                  <LinkedIn />
-                </SocialLink>
+                  <SocialLink
+                    href={linkedin}
+                    target="_blank"
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedIn />
+                  </SocialLink>
 
-                <SocialLink
-                  href="https://www.naukri.com/mnjuser/homepage"
-                  target="_blank"
-                  aria-label="LinkedIn"
-                >
-                  <WorkIcon />
-                </SocialLink>
+                  <SocialLink
+                    href="https://www.naukri.com/mnjuser/homepage"
+                    target="_blank"
+                    aria-label="LinkedIn"
+                  >
+                    <WorkIcon />
+                  </SocialLink>
 
-                <SocialLink
-                  href={github}
-                  target="_blank"
-                  aria-label="GitHub"
-                >
-                  <GitHubIcon />
-                </SocialLink>
+                  <SocialLink
+                    href={github}
+                    target="_blank"
+                    aria-label="GitHub"
+                  >
+                    <GitHubIcon />
+                  </SocialLink>
 
-                <SocialLink
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=santoshpal9816@gmail.com&su=Contact&body=Hello Santosh"
-                  target="_blank"
-                >
-                  <Email />
-                </SocialLink>
-              </SocialIcons>
+                  <SocialLink
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=santoshpal9816@gmail.com&su=Contact&body=Hello Santosh"
+                    target="_blank"
+                  >
+                    <Email />
+                  </SocialLink>
+                </SocialIcons>
               </motion.div>
             </HeroRightContainer>
           </HeroInnerContainer>
         </motion.div>
       </HeroContainer>
-      
+
     </div>
   );
 };

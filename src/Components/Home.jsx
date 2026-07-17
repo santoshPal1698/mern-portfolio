@@ -1,5 +1,5 @@
 import styled, { ThemeProvider } from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "./sections/Hero";
 import Skills from "./sections/Skills";
 import Experience from "./sections/Experience";
@@ -13,6 +13,7 @@ import AIChatbot from "./AI/AIChatbot";
 import Navbar from "./Navbar";
 import { darkTheme, lightTheme } from "../utils/Themes";
 import WhatsAppWidget from "./WhatsAppWidget";
+import { isSantoshPortfolio } from "../services/AuthService";
 
 
 const Body = styled.div`
@@ -39,37 +40,58 @@ const Wrapper = styled.div`
   clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 98%, 0 100%);
 `;
 
+const THEME_KEY = "DarkLigthMode";
+
+function getInitialTheme() {
+  if (typeof window === "undefined") return "dark";
+  const stored = localStorage.getItem(THEME_KEY);
+  return stored === "light" || stored === "dark" ? stored : "dark";
+}
+
 const Home = () => {
   const { loading, portfolioData } = useSelector((state) => state.root);
-  const [theme, setTheme] = useState("dark");
+  console.log(portfolioData)
+  const [theme, setTheme] = useState(getInitialTheme);
+
   const themeToggler = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
+
+  useEffect(() => {
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
 
   return (
     <>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <Navbar theme={theme} toggleThemeControl={themeToggler} />
         {loading ? <Spin_loader /> : null}
-        {portfolioData && (
-          <div>
-            <AIChatbot />
-            <WhatsAppWidget />
-            <Body>
-              <Hero />
-              <Wrapper>
-                <Skills />
-                <Experience />
-              </Wrapper>
-              <Projects />
-              <Wrapper>
-                <Education />
-                {/* <Contact /> */}
-              </Wrapper>
-              <Footer />
-            </Body>
-          </div>
-        )}
+        {
+          portfolioData && (
+            <div>
+              {
+                isSantoshPortfolio(portfolioData) && (
+                  <>
+                    <AIChatbot />
+                    <WhatsAppWidget />
+                  </>
+                )
+              }
+              <Body>
+                <Hero />
+                <Wrapper>
+                  <Skills />
+                  <Experience />
+                </Wrapper>
+                <Projects />
+                <Wrapper>
+                  <Education />
+                  {/* <Contact /> */}
+                </Wrapper>
+                <Footer />
+              </Body>
+            </div>
+          )}
       </ThemeProvider>
     </>
   );

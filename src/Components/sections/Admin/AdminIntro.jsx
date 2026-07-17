@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, message } from "antd"
+import { Form, Input, Button } from "antd"
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { PORTFOLIOPOINTS } from "../../../Api/Endpoints";
 import { hideLoading, ReloadData, showLoading } from "../../../redux/rootSlice";
 import TextArea from "antd/es/input/TextArea";
 import { hasSuperAdminRole } from "../../../services/AuthService";
+import ToastService from "../../../services/toastService";
 
 const AdminIntro = () => {
 
   const { loading, portfolioData } = useSelector((state) => state.root);
   const dispatch = useDispatch();
+  console.log("portfolio",portfolioData);
   const [userRole, setUserRole] = useState(null);
   useEffect(() => {
     const role = hasSuperAdminRole() ? "SUPER_ADMIN_SPTECH" : "GUEST";
@@ -27,15 +29,14 @@ const AdminIntro = () => {
       dispatch(hideLoading());
       dispatch(ReloadData(true));
       if(response.data.success){
-        message.success(response.data.message)
+       ToastService.success(response.data.message);
       }
       else{
-        message.error(response.data.message)
+       ToastService.error(response.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
-        message.error(error.message)
-
+       ToastService.error(response.data.message);
     }
   }
 
@@ -43,6 +44,8 @@ const AdminIntro = () => {
     <>
       <div>
         <Form onFinish={onFinish} layout="vertical" initialValues={portfolioData.intro} >
+        {/* <Form onFinish={onFinish} layout="vertical" > */}
+
           <Form.Item name="name" label="Username">
             <input placeholder="UserName" />
           </Form.Item>

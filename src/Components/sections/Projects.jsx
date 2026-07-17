@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { baseLiveProject } from "../../data/constants";
 import ProjectCard from "../cards/ProjectCard";
 import { useSelector } from "react-redux";
+import { isSantoshPortfolio } from "../../services/AuthService";
 
 const Container = styled.div`
   display: flex;
@@ -107,17 +108,23 @@ const Projects = () => {
       <Wrapper>
         <Title>Projects</Title>
 
-        <div className="button-container">
-          {baseLiveProject.map((page, index) => (
-            <button
-              key={index}
-              onClick={() => handleButtonClick(page.url)}
-              className="styled-button"
-            >
-              {page.name}
-            </button>
-          ))}
-        </div>
+        {
+          isSantoshPortfolio(portfolioData) && (
+            <>
+              <div className="button-container">
+                {baseLiveProject.map((page, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleButtonClick(page.url)}
+                    className="styled-button"
+                  >
+                    {page.name}
+                  </button>
+                ))}
+              </div>
+            </>
+          )
+        }
         <Desc
           style={{
             marginBottom: "40px",

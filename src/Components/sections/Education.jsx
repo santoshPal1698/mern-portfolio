@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { VerticalTimeline } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import styled from "styled-components";
-// import { education } from "../../data/constants";
 import EducationCard from "../cards/EducationCard";
 import EarthCanvas from "../canvas/Earth";
 import { useSelector } from "react-redux";

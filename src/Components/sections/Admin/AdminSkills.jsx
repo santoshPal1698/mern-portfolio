@@ -17,6 +17,7 @@ import {
 } from "@ant-design/icons";
 import useConfirmationModal from "./useConfirmationModal";
 import { hasSuperAdminRole } from "../../../services/AuthService";
+import ToastService from "../../../services/toastService";
 // import "../Admin/css/card.css";
 
 const AdminSkills = () => {
@@ -66,14 +67,14 @@ const AdminSkills = () => {
         dispatch(hideLoading());
         dispatch(ReloadData(true));
         form.resetFields();
-        message.success(response.data.message);
+        ToastService.success(response.data.message);
       } else {
-        message.error(response.data.message);
+        ToastService.error(response.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
       setIsModalOpen(false);
-      message.error(error.message);
+      ToastService.error(error.message);
     }
   };
 
@@ -89,13 +90,13 @@ const AdminSkills = () => {
       dispatch(hideLoading());
       if (response.data.success) {
         dispatch(ReloadData(true));
-        message.success(response.data.message);
+        ToastService.success(response.data.message);
       } else {
-        message.error(response.data.message);
+        ToastService.error(response.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
-      message.error(error.message);
+      ToastService.error(error.message);
     }
   };
 

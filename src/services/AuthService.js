@@ -2,28 +2,21 @@
 const getUserData = () => {
     try {
       const userData = localStorage.getItem("USER");
-  
       if (!userData) {
-        // Return null if no user data is found
         return null;
       }
-  
-      // Parse and return the complete user data object
       return JSON.parse(userData);
     } catch (error) {
-      // console.error("Error fetching user data from localStorage:", error);
-      return null; // Return null on error
+      return null;
     }
   };
 
 const getUserRole = () => {
     try {
       const userData = localStorage.getItem("USER");
-  
       if (!userData) {
         return null;
       }
-        
       const parsedUserData = JSON.parse(userData);
       const role = parsedUserData?.userData?.data?.roles || "GUEST";
       return role;
@@ -32,8 +25,6 @@ const getUserRole = () => {
       return null; // Return null on error
     }
   };
-
-
 
   
   const hasSuperAdminRole = () => {
@@ -52,6 +43,13 @@ const getUserRole = () => {
       // console.error("Error setting user data in localStorage:", error);
     }
   };
+
+const isSantoshPortfolio = (portfolioData) => {
+  const intro = portfolioData?.intro;
+  return (
+    intro?.userId === "67f3a486a6ea9e899b516d3f" && intro?._id === "6715f4ab47cfc08664c6391a"
+  );
+};
   
-  export { getUserRole, hasSuperAdminRole, isAdminRole, setUserRole,getUserData };
+  export { getUserRole, hasSuperAdminRole, isAdminRole, setUserRole,getUserData, isSantoshPortfolio };
   

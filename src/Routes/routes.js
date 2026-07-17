@@ -10,45 +10,15 @@ const travelers = lazy(() => import("../Components/Tour-Travels/Vihan"));
 
 
 const allRoutes = [
-  {
-    path: "/",
-    element: Home,
-  },
-
-  {
-    path: "/user/:name",
-    element: Home,
-  },
-
- {
-    path: "/vihaan",
-     element: vihanLanding,
-   },
-
-  {
-    path: "/weather",
-    element: Weather,
-  },
-  {
-    path: "/dv-travels",
-    element: travelers,
-  },
-  {
-    path: "/login",
-    element: Login,
-  },
-
+  { path: "/",element: Home},
+  { path: "/user/:name", element: Home},
+  { path: "/vihaan",element: vihanLanding},
+  { path: "/weather",element: Weather},
+  { path: "/dv-travels",  element: travelers },
+  { path: "/login", element: Login},
   { path: "/admin-dashboard", element: Admin, protected: true },
-
-  {
-    path: "/429",
-    element: PageNotFound,
-  },
-
-  {
-    path: "*",
-    element: PageNotFound,
-  },
+  { path: "/429", element: PageNotFound },
+  { path: "*", element: PageNotFound},
 ];
 
 export default allRoutes;

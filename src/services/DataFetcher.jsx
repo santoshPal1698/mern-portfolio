@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { PORTFOLIOPOINTS } from "../Api/Endpoints";
 import { hideLoading, ReloadData, SetPortfolioData, showLoading } from "../redux/rootSlice";
-import { message } from "antd";
+import ToastService from "./toastService";
 
 
 const DataFetcher = () => {
@@ -19,45 +19,48 @@ const DataFetcher = () => {
     if (!portfolioData || reloadData) {
       if (name) {
         // alert(`data Fetching portfolio data for user: ${name}`);
-        getAllPortFoliobyName(name); 
+        getAllPortFoliobyName(name);
       } else {
         // alert("data Fetching default portfolio data");
-        getAllPortFolio(); 
+        getAllPortFolio();
       }
     }
   }, [portfolioData, reloadData, name]);
 
- const getAllPortFolio = async () => {
-  dispatch(showLoading());
-  try {
-    const { data } = await axios.get(
-      `${PORTFOLIOPOINTS.ApiBaseUrl}get-portfolio`
-    );
-    dispatch(SetPortfolioData(data?.data || []));
-    dispatch(ReloadData(false));
-  } catch (error) {
-  message.error(
+
+  const getAllPortFolio = async () => {
+    dispatch(showLoading());
+    try {
+      const { data } = await axios.get(
+        `${PORTFOLIOPOINTS.ApiBaseUrl}get-portfolio`
+      );
+      dispatch(SetPortfolioData(data?.data || []));
+      // ToastService.success(data.message);
+      dispatch(ReloadData(false));
+    } catch (error) {
+      ToastService.error(
         error?.response?.data?.message || "Something went wrong"
       );
-  } finally {
-    dispatch(hideLoading());
-  }
-};
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+
   const getAllPortFoliobyName = async (name) => {
     dispatch(showLoading());
     try {
       const { data } = await axios.get(`${PORTFOLIOPOINTS.ApiBaseUrl}get-portfolio/${name}`);
       dispatch(SetPortfolioData(data?.data || []));
       dispatch(ReloadData(false));
+      ToastService.success(data.message);
     } catch (error) {
-      // message.error(error.response.data.message);
       const status = error?.response?.status;
-    if (status == 429 || status == 404) {
-      navigate("/429");
-      message.error(
-        error?.response?.data?.message || "Something went wrong"
-      );
-    }
+      if (status == 429 || status == 404) {
+        navigate("/429");
+        ToastService.error(
+          error?.response?.data?.message || "Something went wrong"
+        );
+      }
     } finally {
       dispatch(hideLoading());
     }

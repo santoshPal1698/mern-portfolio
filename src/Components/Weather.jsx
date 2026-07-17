@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ENDPOINTS } from "../Api/Endpoints";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import styled, { keyframes, createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import ToastService from "../services/toastService";
 
 /* ─── Global Styles ─────────────────────────────────────────── */
 const GlobalStyle = createGlobalStyle`
@@ -424,10 +423,10 @@ const Weather = () => {
       );
       newWetherData(response.data);
       setLoading(false);
-      toast.success(`📍 ${city}`, { style: { background: "#0d1f5c", color: "#e8eeff", border: "1px solid rgba(255,255,255,0.12)" } });
+      ToastService.success(`📍 ${city}`, { style: { background: "#0d1f5c", color: "#e8eeff", border: "1px solid rgba(255,255,255,0.12)" } });
     } catch (error) {
       setError(error.response.data.message);
-      toast.error(error.response.data.message, { style: { background: "#0d1f5c", color: "#e8eeff" } });
+      ToastService.error(error.response.data.message, { style: { background: "#0d1f5c", color: "#e8eeff" } });
       setLoading(false);
     }
   };
@@ -453,7 +452,6 @@ const Weather = () => {
   return (
     <>
       <GlobalStyle />
-      <ToastContainer position="top-right" theme="dark" />
       <Page>
         <Orb />
         <Orb />

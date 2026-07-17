@@ -27,8 +27,8 @@ const spin = keyframes`
 // ─── Styled Components ──────────────────────────────────────────────────────────
 const FloatBtn = styled.button`
   position: fixed;
-  bottom: 28px;
-  right: 25px;
+ bottom: 55px;
+  right: 22px;
   z-index: 9999;
   width: 60px;
   height: 60px;
@@ -68,13 +68,29 @@ const ChatWindow = styled.div`
     0 0 0 1px rgba(255, 255, 255, 0.04);
   animation: ${fadeSlideUp} 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 
+
+  @media (min-width: 1024px) {
+    width: 460px;
+    max-height: 720px;
+    bottom: 110px;
+    right: 40px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 500px;
+    max-height: 780px;
+  }
+
   @media (max-width: 480px) {
     width: calc(100vw - 24px);
     right: 12px;
     bottom: 88px;
     max-height: 70vh;
   }
+
 `;
+
+
 
 const Header = styled.div`
   padding: 16px 20px;

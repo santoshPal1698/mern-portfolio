@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { PORTFOLIOPOINTS } from "../../../Api/Endpoints";
@@ -11,6 +11,7 @@ import useConfirmationModal from "./useConfirmationModal";
 import TextArea from "antd/es/input/TextArea";
 import { hasSuperAdminRole } from "../../../services/AuthService";
 import "../Admin/css/card.css";
+import ToastService from "../../../services/toastService";
 
 const AdminExperince = () => {
   const dispatch = useDispatch();
@@ -49,14 +50,14 @@ const AdminExperince = () => {
       if (response.data.success) {
         dispatch(hideLoading());
         dispatch(ReloadData(true));
-        message.success(response.data.message);
+        ToastService.success(response.data.message);
       } else {
-        message.error(response.data.message);
+        ToastService.error(response.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
       setIsModalOpen(false);
-      message.error(error.message);
+      ToastService.error(error.message);
     }
   };
 
@@ -78,13 +79,13 @@ const AdminExperince = () => {
       dispatch(hideLoading());
       if (response.data.success) {
         dispatch(ReloadData(true));
-        message.success(response.data.message);
+        ToastService.success(response.data.message);
       } else {
-        message.error(response.data.message);
+        ToastService.error(response.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
-      message.error(error.message);
+      ToastService.error(error.message);
     }
   };
 
