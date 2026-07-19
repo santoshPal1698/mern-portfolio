@@ -66,7 +66,7 @@ const Admin = () => {
               className="profile_img"
             />
             <h2 className="welcome_text">
-              Hello: {`${userRole?.firstName} ${userRole?.lastName}`}
+              Hi: {`${userRole?.firstName} ${userRole?.lastName}`}
             </h2>
           </div>
           <div className="logout">

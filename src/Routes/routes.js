@@ -21,6 +21,7 @@ const allRoutes = [
   { path: "/login", element: Login},
   { path: "/admin-dashboard", element: Admin, protected: true },
   { path: "/429", element: PageNotFound },
+  { path: "/not-access", element: PageNotFound },
   { path: "*", element: PageNotFound},
 ];
 

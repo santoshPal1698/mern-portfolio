@@ -77,11 +77,10 @@ const Login = () => {
 
   const handleGoogleLogin =async () => {
     const result = await signInWithPopup(auth,googleProvider);
-    console.log("goolge login",result)
-    const token =await result.user.getIdToken();
-    localStorage.setItem("USER", JSON.stringify(result.user));
-    // navigate("/admin-dashboard");
-    // await login(token)
+    // console.log("goolge login",result)
+    navigate("/not-access");
+    // const token =await result.user.getIdToken();
+    // localStorage.setItem("USER", JSON.stringify(result.user));    // await login(token)
  };
 
 
@@ -90,7 +89,7 @@ const Login = () => {
     <>
       <div className="login-container">
         <StyledStarsCanvas />
-        <HeroBgAnimation />
+        {/* <HeroBgAnimation /> */}
         <Card className="login-card">
           <Title level={2} className="title_gradient_text">
             Super Admin Login
@@ -133,7 +132,7 @@ const Login = () => {
                 Log In
               </Button>
         
-              {/* <Button
+             <Button
                 className="btn_login mt-4"
                 block
                 color="default" variant="outlined"
@@ -141,7 +140,7 @@ const Login = () => {
                 icon={<GoogleOutlined />}
               >
                 Login with Google
-                </Button> */}
+                </Button> 
             </Form.Item>
           </Form>
         </Card>

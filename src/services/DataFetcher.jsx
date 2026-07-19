@@ -52,14 +52,14 @@ const DataFetcher = () => {
       const { data } = await axios.get(`${PORTFOLIOPOINTS.ApiBaseUrl}get-portfolio/${name}`);
       dispatch(SetPortfolioData(data?.data || []));
       dispatch(ReloadData(false));
-      ToastService.success(data.message);
+      // ToastService.success(data.message);
     } catch (error) {
       const status = error?.response?.status;
       if (status == 429 || status == 404) {
         navigate("/429");
-        ToastService.error(
-          error?.response?.data?.message || "Something went wrong"
-        );
+        // ToastService.error(
+        //   error?.response?.data?.message || "Something went wrong"
+        // );
       }
     } finally {
       dispatch(hideLoading());

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import ReadMoreText from "../sections/Admin/Redmore";
+
 
 const Card = styled.div`
   width: 330px;
@@ -66,14 +68,10 @@ const Date = styled.div`
 const Description = styled.div`
   font-weight: 400;
   color: ${({ theme }) => theme.text_secondary + 99};
-  overflow: hidden;
   margin-top: 8px;
-  display: -webkit-box;
   max-width: 100%;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
 `;
+
 const Members = styled.div`
   display: flex;
   align-items: center;
@@ -93,27 +91,40 @@ const Button = styled.a`
   text-decoration: none;
   font-weight: 600;
   text-align: center;
+  appearance: button;
+  text-decoration: none;
+  width: 55%;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 6px 0;
+  background: ${({ theme }) => theme.button};
+  color: white;
+  border-radius: 50px;
+  font-weight: 600;
+  color: white;
 `;
 
 const ProjectCard = ({ project }) => {
   return (
     <Card>
-      <a href={project.image} target="_blank" >
-         <Image src={project.image} />
-    </a>
+      <a href={project.image} target="_blank">
+        <Image src={project.image} />
+      </a>
       <Tags></Tags>
       <Details>
         <Title>{project.title}</Title>
         <Date>{project.date}</Date>
-        <Description>{project.description}</Description>
+        <Description>
+          <ReadMoreText text={project.description} maxLength={100} />
+        </Description>
       </Details>
       <Members>
         {project.member?.map((member) => (
-          <Avatar src={member.img}  />
+          <Avatar src={member.img} />
         ))}
       </Members>
       <Button href={project.github} target="_blank">
-        Live Project Url
+       Live Project
       </Button>
     </Card>
   );

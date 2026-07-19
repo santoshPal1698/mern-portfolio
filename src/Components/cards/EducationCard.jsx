@@ -2,6 +2,7 @@ import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import styled from "styled-components";
 import { useTheme } from 'styled-components';
+import ReadMoreText from "../sections/Admin/Redmore";
 
 
 const StyledTimelineElement = styled(VerticalTimelineElement)`
@@ -131,7 +132,7 @@ const EducationCard = ({ education }) => {
         {education?.grade}
       </Grade>
       <Description>
-        {education?.desc && <Span>{education.desc}</Span>}
+        {education?.desc && <Span> <ReadMoreText text={education.desc} maxLength={80}/></Span>}
       </Description>
     </StyledTimelineElement >
   );

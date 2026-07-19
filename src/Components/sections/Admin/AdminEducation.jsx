@@ -12,6 +12,7 @@ import TextArea from "antd/es/input/TextArea";
 import { hasSuperAdminRole } from "../../../services/AuthService";
 import "../Admin/css/card.css";
 import ToastService from "../../../services/toastService";
+import ReadMoreText from "./Redmore";
 
 const AdminEducation = () => {
   const dispatch = useDispatch();
@@ -206,7 +207,7 @@ const AdminEducation = () => {
               >
                 <Card.Meta
                   title={card.company}
-                  description={card.desc?.slice(0, 70) + "..."}
+                  description={<ReadMoreText text={card.desc} maxLength={70} />}
                 />
               </Card>
             </Col>

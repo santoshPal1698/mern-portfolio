@@ -12,6 +12,7 @@ import useConfirmationModal from "./useConfirmationModal";
 import { hasSuperAdminRole } from "../../../services/AuthService";
 import "../Admin/css/card.css";
 import ToastService from "../../../services/toastService";
+import ReadMoreText from "./Redmore";
 
 const AdminProjects = () => {
   const dispatch = useDispatch();
@@ -214,7 +215,7 @@ const AdminProjects = () => {
         >
           <Card.Meta
             title={card.Project}
-            description={card.description?.slice(0, 70) + "..."}
+            description={<ReadMoreText text={card.description} maxLength={70} />}
           />
         </Card>
       </Col>

@@ -2,6 +2,7 @@ import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import styled from "styled-components";
 import { useTheme } from 'styled-components';
+import ReadMoreText from "../sections/Admin/Redmore";
 
 
 
@@ -137,7 +138,7 @@ const ExperienceCard = ({ experience }) => {
         </Body>
       </Top>
       <Description>
-        {experience?.desc && <Span>{experience.desc}</Span>}
+        {experience?.desc && <Span> <ReadMoreText text={experience.desc} maxLength={170} /></Span>}
         {experience?.skills && (
           <>
             <br />
