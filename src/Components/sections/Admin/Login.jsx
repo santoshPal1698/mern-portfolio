@@ -132,7 +132,7 @@ const Login = () => {
                 Log In
               </Button>
         
-             <Button
+             {/* <Button
                 className="btn_login mt-4"
                 block
                 color="default" variant="outlined"
@@ -140,7 +140,7 @@ const Login = () => {
                 icon={<GoogleOutlined />}
               >
                 Login with Google
-                </Button> 
+                </Button>  */}
             </Form.Item>
           </Form>
         </Card>
