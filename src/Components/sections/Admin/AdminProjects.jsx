@@ -35,17 +35,14 @@ const AdminProjects = () => {
       dispatch(showLoading());
       let response;
       if (selectedItemEdit) {
-        response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}update-project`,
-          {
+        response = await axios.post(`${PORTFOLIOPOINTS.ApiBaseUrl}update-project`,{
             ...values,
             _id: selectedItemEdit._id,
           }
         );
       } else {
         response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}add-project`,
-          values
+          `${PORTFOLIOPOINTS.ApiBaseUrl}add-project`,values
         );
       }
       setIsModalOpen(false);
@@ -127,19 +124,23 @@ const AdminProjects = () => {
               layout="vertical"
               initialValues={selectedItemEdit}
             >
-              <Form.Item name="title" label="Project Title">
+              <Form.Item name="title" label="Project Title" rules={[
+             { required: true, message: "Please Enter Your Project title." } ]}>
                 <input placeholder="Project Title" />
               </Form.Item>
 
-              <Form.Item name="image" label="Project Logo Pic">
+              <Form.Item name="image" label="Project Logo Pic" rules={[
+             { required: true, message: "Please Enter Your Logo Url." } ]}>
                 <input placeholder="Project profile" />
               </Form.Item>
 
-              <Form.Item name="date" label="Date">
+              <Form.Item name="date" label="Date" rules={[
+             { required: true, message: "Please Select Your Date" }]}>
                 <input placeholder="Date" />
               </Form.Item>
 
-              <Form.Item name="description" label="Description">
+              <Form.Item name="description" label="Description" rules={[
+             { required: true, message: "Please Enter Your Description." } ]}>
                 <TextArea
                   placeholder="Enter your text here..."
                   autoSize={{ minRows: 5, maxRows: 15 }}
@@ -151,20 +152,23 @@ const AdminProjects = () => {
                 />
               </Form.Item>
 
-              <Form.Item name="github" label="Github">
+              <Form.Item name="github" label="Github"rules={[
+             { required: true, message: "Please Enter Your Github Url." } ]} >
                 <input placeholder="Github " />
               </Form.Item>
 
-              <Form.Item name="webapp" label="Project Url">
+              <Form.Item name="webapp" label="Project Url" rules={[
+             { required: true, message: "Please Enter Your Ptoject Url." } ]}>
                 <input placeholder="Project Url" />
               </Form.Item>
 
-              <Form.Item name="tags" label="Tags Profile">
+              <Form.Item name="tags" label="Tags Profile" rules={[
+             { required: true, message: "Please Enter Your Tags Profile." } ]}>
                 <input placeholder="Tags Profile" />
               </Form.Item>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" >
                   {selectedItemEdit ? "Update" : "Add"}
                 </Button>
               </Form.Item>

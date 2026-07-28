@@ -122,19 +122,23 @@ const AdminEducation = () => {
               layout="vertical"
               initialValues={selectedItemEdit}
             >
-              <Form.Item name="school" label="School Clg Name">
+              <Form.Item name="school" label="School Clg Name"  rules={[
+             { required: true, message: "Please Enter Your School or Collage Name." } ]}>
                 <input placeholder="School Name" />
               </Form.Item>
 
-              <Form.Item name="img" label="Company Logo Pic">
+              <Form.Item name="img" label="School/ Collage Pic"  rules={[
+             { required: true, message: "Please Enter Your School/ Collage Pic." } ]}>
                 <input placeholder="Company profile" />
               </Form.Item>
 
-              <Form.Item name="date" label="Date">
+              <Form.Item name="date" label="Date"  rules={[
+             { required: true, message: "Please Enter Your Date." } ]}>
                 <input placeholder="Date" />
               </Form.Item>
 
-              <Form.Item name="desc" label="Description">
+              <Form.Item name="desc" label="Description"  rules={[
+             { required: true, message: "Please Enter Description." } ]}>
                 <TextArea
                   placeholder="Enter your text here..."
                   autoSize={{ minRows: 5, maxRows: 15 }}
@@ -146,11 +150,13 @@ const AdminEducation = () => {
                 />
               </Form.Item>
 
-              <Form.Item name="grade" label="Grade">
+              <Form.Item name="grade" label="Grade"  rules={[
+             { required: true, message: "Please Enter Your Grade." } ]}>
                 <input placeholder="Grade " />
               </Form.Item>
 
-              <Form.Item name="degree" label="Degree Profile">
+              <Form.Item name="degree" label="Education Profiles Details"  rules={[
+             { required: true, message: "Please Enter Your Education Profiles Details." } ]}>
                 <input placeholder="Degree Profile" />
               </Form.Item>
 

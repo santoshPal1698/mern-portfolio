@@ -165,6 +165,7 @@ function UserDetails() {
   return (
     <div className="container-fluid mt-5">
       <h2 className="text-center text-primary mb-4">User Management</h2>
+      {/* <UserTable /> */}
       <div className="row">
         <div className="col-md-8 col-lg-8 col-12">
           {/* Search */}

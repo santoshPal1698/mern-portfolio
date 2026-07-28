@@ -3,8 +3,8 @@ import React, { useState } from "react";
 const ReadMoreText = ({
   text = "",
   maxLength = 70,
-  moreLabel = "Read more...",
-  lessLabel = "Read less",
+  moreLabel = "Read More",
+  lessLabel = "Less",
   color = "#2575fc",
 }) => {
   const [expanded, setExpanded] = useState(false);

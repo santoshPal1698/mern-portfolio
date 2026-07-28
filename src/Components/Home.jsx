@@ -50,7 +50,6 @@ function getInitialTheme() {
 
 const Home = () => {
   const { loading, portfolioData } = useSelector((state) => state.root);
-  console.log(portfolioData)
   const [theme, setTheme] = useState(getInitialTheme);
 
   const themeToggler = () => {

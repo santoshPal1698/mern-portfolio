@@ -17,6 +17,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import WorkIcon from "@mui/icons-material/Work";
 import DownloadIcon from "@mui/icons-material/Download";
 import { isSantoshPortfolio } from "../../services/AuthService";
+import ReadMoreText from "../sections/Admin/Redmore";
 
 const SocialLink = styled.a`
   width: 46px;
@@ -278,7 +279,9 @@ const Hero = () => {
               </motion.div>
 
               <motion.div {...headContentAnimation}>
-                <SubTitle>{description || "NA"}</SubTitle>
+                <SubTitle> 
+                  <ReadMoreText text={description} maxLength={380} />
+                  </SubTitle>
               </motion.div>
 
               <ResumeButton href={resume} target="_blank">

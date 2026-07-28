@@ -123,19 +123,23 @@ const AdminExperince = () => {
               layout="vertical"
               initialValues={selectedItemEdit}
             >
-              <Form.Item name="company" label="Company Name">
+              <Form.Item name="company" label="Company Name" rules={[
+             { required: true, message: "Please Enter Company Name." } ]}>
                 <input placeholder="Company Name" />
               </Form.Item>
 
-              <Form.Item name="img" label="Company Logo Pic">
+              <Form.Item name="img" label="Company Logo Pic" rules={[
+             { required: true, message: "Please Enter Your Company Logo Url." } ]}>
                 <input placeholder="Company profile" />
               </Form.Item>
 
-              <Form.Item name="date" label="Date">
+              <Form.Item name="date" label="Date" rules={[
+             { required: true, message: "Please Enter Your Date." } ]}>
                 <input placeholder="Date" />
               </Form.Item>
 
-              <Form.Item name="desc" label="Description">
+              <Form.Item name="desc" label="Description" rules={[
+             { required: true, message: "Please Enter Your Description." } ]}>
                 <TextArea
                   placeholder="Enter your text here..."
                   autoSize={{ minRows: 5, maxRows: 15 }} 
@@ -147,7 +151,8 @@ const AdminExperince = () => {
                 />
               </Form.Item>
 
-              <Form.Item name="role" label="Role">
+              <Form.Item name="role" label="Role" rules={[
+             { required: true, message: "Please Enter Your Role." } ]}>
                 <input placeholder="Role " />
               </Form.Item>
 
@@ -155,8 +160,9 @@ const AdminExperince = () => {
                 <input placeholder="Doc Profile" />
               </Form.Item>
 
-              <Form.Item name="skills" label="skills Profile">
-                <input placeholder="skills Profile" />
+              <Form.Item name="skills" label="skills Profile" rules={[
+             { required: true, message: "Please Enter Your Skils." } ]}>
+                <input placeholder="skills Profile Like [Html,Css, Javascript]" />
               </Form.Item>
 
               <Form.Item>

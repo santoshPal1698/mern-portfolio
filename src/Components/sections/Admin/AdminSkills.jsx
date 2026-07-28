@@ -133,7 +133,8 @@ const AdminSkills = () => {
               // initialValues={{ skills: [{}] }}
               initialValues={selectedItemEdit}
             >
-              <Form.Item name="title" label="Skills Category Title">
+              <Form.Item name="title" label="Skills Category Title" rules={[
+             { required: true, message: "Please Enter Your Category Skills tiltle ." } ]}>
                 <input placeholder="Skills Category Title" />
               </Form.Item>
 
@@ -165,7 +166,7 @@ const AdminSkills = () => {
                           rules={[
                             {
                               required: true,
-                              message: "Please upload an image!",
+                              message: "Please upload an image Url",
                             },
                           ]}
                         >

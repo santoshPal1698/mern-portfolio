@@ -188,7 +188,7 @@ const AdminDashBoard = () => {
             </div>
           </div>
         </div>
-        {/* <div className="row py-4">
+       <div className="row py-4">
           <div className="col-md-4 col-lg-4">
             <div className="card">
               <AdvancedHighChart
@@ -210,7 +210,7 @@ const AdminDashBoard = () => {
               />
             </div>
           </div>
-        </div>  */}
+        </div>  
       </div>
     </div>
   );

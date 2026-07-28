@@ -46,18 +46,22 @@ const AdminIntro = () => {
         <Form onFinish={onFinish} layout="vertical" initialValues={portfolioData.intro} >
         {/* <Form onFinish={onFinish} layout="vertical" > */}
 
-          <Form.Item name="name" label="Username">
+          <Form.Item name="name" label="Username" rules={[
+             { required: true, message: "Please Enter your Username." } ]}>
             <input placeholder="UserName" />
           </Form.Item>
-          <Form.Item name="profile_url" label="User profile">
-            <input placeholder="User profile" />
+          <Form.Item name="profile_url" label="User profile" rules={[
+             { required: true, message: "Please Enter your Profile Url." } ]}>
+            <input placeholder="User profile Url" />
           </Form.Item>
 
-          <Form.Item name="resume" label="Resume">
+          <Form.Item name="resume" label="Resume" rules={[
+             { required: true, message: "Please Enter your Resume Link." } ]}>
             <input placeholder="Resume" />
           </Form.Item>
 
-          <Form.Item name="description" label="Description">
+          <Form.Item name="description" label="Description" rules={[
+             { required: true, message: "Please Enter your Description Link." } ]}>
                 <TextArea
                   placeholder="Enter your text here..."
                   autoSize={{ minRows: 5, maxRows: 15 }} 
@@ -69,15 +73,18 @@ const AdminIntro = () => {
                 />
               </Form.Item>
 
-          <Form.Item name="github" label="Github Profile">
+          <Form.Item name="github" label="Github Profile" rules={[
+             { required: true, message: "Please Enter Github Url." } ]}>
             <input placeholder="Github Profile" disabled readOnly />
           </Form.Item>
 
-          <Form.Item name="linkedin" label="Linkdin Profile">
+          <Form.Item name="linkedin" label="Linkdin Profile" rules={[
+             { required: true, message: "Please Enter your Linkdin Url." } ]}>
             <input placeholder="Linkdin Profile" disabled readOnly  />
           </Form.Item>
 
-          <Form.Item name="roles" label="Roles">
+          <Form.Item name="roles" label="Roles" rules={[
+             { required: true, message: "Please Enter your Roles." } ]}>
             <input placeholder="Roles" disabled readOnly  />
           </Form.Item>
 
@@ -85,8 +92,16 @@ const AdminIntro = () => {
           <Button type="primary" 
           disabled={!hasSuperAdminRole()}
           htmlType="submit">
-          update
+          Update
+          
         </Button>
+
+        {/* <Button type="primary" 
+          disabled={!hasSuperAdminRole()}
+          htmlType="submit">
+           Submit
+        </Button> */}
+
         </Form.Item>
         </Form>
       </div>
