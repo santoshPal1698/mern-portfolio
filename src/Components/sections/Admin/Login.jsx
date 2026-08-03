@@ -12,13 +12,12 @@ import ToastService from "../../../services/toastService";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../../../firebase";
 
-// Three modes rendered in the same left-hand panel: "login" | "signup" | "forgot"
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("login");
-
   const [loginForm] = Form.useForm();
   const [signupForm] = Form.useForm();
   const [forgotForm] = Form.useForm();
@@ -33,8 +32,8 @@ const Login = () => {
       const { data } = await axios.get(
         `${PORTFOLIOPOINTS.ApiBaseUrl}get-portfolio/${name}`
       );
-      // dispatch(SetPortfolioData(data?.data || []));
-      // dispatch(ReloadData(false));
+      dispatch(SetPortfolioData([]));
+      dispatch(ReloadData(false));
       ToastService.success(data.message);
     } catch (error) {
       const status = error?.response?.status;
@@ -65,8 +64,9 @@ const Login = () => {
         if (userDetails.roles == "SUPER_ADMIN_SPTECH") {
           navigate("/admin-dashboard");
         } else {
-          getAllPortFoliobyName(userDetails.firstName);
-          navigate(`/admin-dashboard/${userDetails.firstName}`);
+          // alert("by name admin");
+          // getAllPortFoliobyName(userDetails.firstName);
+          navigate("/user-dashboard");
         }
         ToastService.success(response.data.message);
       } else {
@@ -84,8 +84,6 @@ const Login = () => {
     try {
       setLoading(true);
       dispatch(showLoading());
-      // payload: password, firstName, lastName, email, gender, phone_Number, roles
-      // confirmPassword is only for client-side validation, strip it before sending
       const { confirmPassword, ...signupPayload } = values;
       const response = await axios.post(`${PORTFOLIOPOINTS.ApiBaseUrl}register`, {
         ...signupPayload,
@@ -206,8 +204,8 @@ const Login = () => {
                   name="email"
                   label="Email"
                   rules={[
-                    { required: true, message: "Please enter your email." },
-                    { type: "email", message: "Please enter a valid email." },
+                    { required: true, message: "Please Enter your email." },
+                    { type: "email", message: "Please Enter a valid email." },
                   ]}
                 >
                   <Input
@@ -221,7 +219,7 @@ const Login = () => {
                   name="password"
                   label="Password"
                   rules={[
-                    { required: true, message: "Please enter your password." },
+                    { required: true, message: "Please Enter your password." },
                   ]}
                 >
                   <Input.Password
@@ -292,8 +290,8 @@ const Login = () => {
                   name="email"
                   label="Email"
                   rules={[
-                    { required: true, message: "Please enter your email." },
-                    { type: "email", message: "Please enter a valid email." },
+                    { required: true, message: "Please Enter your email." },
+                    { type: "email", message: "Please Enter a valid email." },
                   ]}
                 >
                   <Input
@@ -359,7 +357,7 @@ const Login = () => {
                     name="password"
                     label="Password"
                     rules={[
-                      { required: true, message: "Please enter a password." },
+                      { required: true, message: "Please Enter a password." },
                       { min: 6, message: "At least 6 characters." },
                     ]}
                   >
@@ -433,8 +431,8 @@ const Login = () => {
                   name="email"
                   label="Email"
                   rules={[
-                    { required: true, message: "Please enter your email." },
-                    { type: "email", message: "Please enter a valid email." },
+                    { required: true, message: "Please Enter your email." },
+                    { type: "email", message: "Please Enter a valid email." },
                   ]}
                 >
                   <Input
@@ -468,21 +466,6 @@ const Login = () => {
         </div>
       </div>
 
-      {/* ---------------- WAVE DIVIDER ---------------- */}
-      <svg
-        className="auth-wave-divider"
-        viewBox="0 0 200 800"
-        preserveAspectRatio="none"
-      >
-        <path
-          className="auth-wave-path auth-wave-path-back"
-          d="M200,0 C120,90 160,180 110,270 C60,360 140,450 90,540 C40,630 130,720 90,800 L200,800 L200,0 Z"
-        />
-        <path
-          className="auth-wave-path auth-wave-path-front"
-          d="M200,0 C140,80 190,170 130,260 C70,350 160,440 110,540 C60,640 150,730 120,800 L200,800 L200,0 Z"
-        />
-      </svg>
 
       {/* ---------------- RIGHT: BANNER PANEL ---------------- */}
       <div className="auth-panel-banner">

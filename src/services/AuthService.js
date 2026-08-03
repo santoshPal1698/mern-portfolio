@@ -1,3 +1,4 @@
+const USER_KEY = "USER";
 
 const getUserData = () => {
     try {
@@ -49,6 +50,28 @@ const isSantoshPortfolio = (portfolioData) => {
   return (
     intro?.userId === "67f3a486a6ea9e899b516d3f" && intro?._id === "6715f4ab47cfc08664c6391a"
   );
+};
+
+
+export const getUser = () => {
+  const raw = localStorage.getItem(USER_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error("Corrupt USER value in localStorage", err);
+    return null;
+  }
+};
+ 
+export const isLoggedIn = () => !!localStorage.getItem(USER_KEY);
+ 
+export const setUser = (userObj) => {
+  localStorage.setItem(USER_KEY, JSON.stringify(userObj));
+};
+ 
+export const logout = () => {
+  localStorage.removeItem(USER_KEY);
 };
   
   export { getUserRole, hasSuperAdminRole, isAdminRole, setUserRole,getUserData, isSantoshPortfolio };

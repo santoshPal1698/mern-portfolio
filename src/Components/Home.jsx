@@ -14,6 +14,7 @@ import Navbar from "./Navbar";
 import { darkTheme, lightTheme } from "../utils/Themes";
 import WhatsAppWidget from "./WhatsAppWidget";
 import { isSantoshPortfolio } from "../services/AuthService";
+import DataFetcher from "../services/DataFetcher";
 
 
 const Body = styled.div`
@@ -63,6 +64,7 @@ const Home = () => {
   return (
     <>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        {/* <DataFetcher/> */}
         <Navbar theme={theme} toggleThemeControl={themeToggler} />
         {loading ? <Spin_loader /> : null}
         {

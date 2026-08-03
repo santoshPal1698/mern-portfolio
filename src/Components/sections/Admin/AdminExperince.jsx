@@ -13,15 +13,13 @@ import { hasSuperAdminRole } from "../../../services/AuthService";
 import "../Admin/css/card.css";
 import ToastService from "../../../services/toastService";
 import ReadMoreText from "./Redmore";
+import { useNavigate } from "react-router-dom";
 
 const AdminExperince = () => {
   const dispatch = useDispatch();
   const { portfolioData } = useSelector((state) => state.root);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [selectedItemEdit, setSelectedItemEdit] = React.useState(null);
-  const [type, setType] = React.useState("add");
   const { showConfirm } = useConfirmationModal();
-
+  const navigate = useNavigate();
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -29,42 +27,9 @@ const AdminExperince = () => {
     setUserRole(role);
   }, []);
 
-  const onFinish = async (values) => {
-    try {
-      dispatch(showLoading());
-      let response;
-      if (selectedItemEdit) {
-        response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}update-experience`,
-          {
-            ...values,
-            _id: selectedItemEdit._id,
-          }
-        );
-      } else {
-        response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}add-experience`,
-          values
-        );
-      }
-      setIsModalOpen(false);
-      if (response.data.success) {
-        dispatch(hideLoading());
-        dispatch(ReloadData(true));
-        ToastService.success(response.data.message);
-      } else {
-        ToastService.error(response.data.message);
-      }
-    } catch (error) {
-      dispatch(hideLoading());
-      setIsModalOpen(false);
-      ToastService.error(error.message);
-    }
-  };
-
   const showDeleteConfirmation = (item) => {
     showConfirm({
-      title: 'Delete Confirmation',
+      title: "Delete Confirmation",
       content: `Are you sure you want to delete "${item.company}" with ID: ${item._id}?`,
       onConfirm: () => deleteExperice(item?._id),
     });
@@ -73,9 +38,11 @@ const AdminExperince = () => {
   const deleteExperice = async (id) => {
     try {
       dispatch(showLoading());
-      const response = await axios.post(`${PORTFOLIOPOINTS.ApiBaseUrl}delete-experience`,{
+      const response = await axios.post(
+        `${PORTFOLIOPOINTS.ApiBaseUrl}delete-experience`,
+        {
           _id: id,
-        }
+        },
       );
       dispatch(hideLoading());
       if (response.data.success) {
@@ -90,90 +57,17 @@ const AdminExperince = () => {
     }
   };
 
-
-
   return (
     <>
       <Button
         type="primary"
         icon={<PlusOutlined />}
         disabled={!hasSuperAdminRole()}
-        onClick={() => {
-          setSelectedItemEdit(null);
-          setIsModalOpen(true);
-        }}
-        style={{ borderRadius: 5}}
+        onClick={() => navigate("/admin/experience-form")}
+        style={{ borderRadius: 5 }}
       >
         Experince
       </Button>
-
-      {(type == "add" || selectedItemEdit) && (
-        <Modal
-          title={selectedItemEdit ? "Edit Experince" : "Add Experince"}
-          open={isModalOpen}
-          footer={null}
-          onCancel={() => {
-            setIsModalOpen(false);
-            setSelectedItemEdit(null);
-          }}
-        >
-          <div>
-            <Form
-              onFinish={onFinish}
-              layout="vertical"
-              initialValues={selectedItemEdit}
-            >
-              <Form.Item name="company" label="Company Name" rules={[
-             { required: true, message: "Please Enter Company Name." } ]}>
-                <input placeholder="Company Name" />
-              </Form.Item>
-
-              <Form.Item name="img" label="Company Logo Pic" rules={[
-             { required: true, message: "Please Enter Your Company Logo Url." } ]}>
-                <input placeholder="Company profile" />
-              </Form.Item>
-
-              <Form.Item name="date" label="Date" rules={[
-             { required: true, message: "Please Enter Your Date." } ]}>
-                <input placeholder="Date" />
-              </Form.Item>
-
-              <Form.Item name="desc" label="Description" rules={[
-             { required: true, message: "Please Enter Your Description." } ]}>
-                <TextArea
-                  placeholder="Enter your text here..."
-                  autoSize={{ minRows: 5, maxRows: 15 }} 
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    resize: "none", 
-                  }}
-                />
-              </Form.Item>
-
-              <Form.Item name="role" label="Role" rules={[
-             { required: true, message: "Please Enter Your Role." } ]}>
-                <input placeholder="Role " />
-              </Form.Item>
-
-              <Form.Item name="doc" label="Doc Profile">
-                <input placeholder="Doc Profile" />
-              </Form.Item>
-
-              <Form.Item name="skills" label="skills Profile" rules={[
-             { required: true, message: "Please Enter Your Skils." } ]}>
-                <input placeholder="skills Profile Like [Html,Css, Javascript]" />
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  {selectedItemEdit ? "Update" : "Add"}
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </Modal>
-      )}
 
       <div className="portfolio-container">
         <Row gutter={[16, 16]}>
@@ -184,11 +78,11 @@ const AdminExperince = () => {
                 hoverable
                 cover={
                   <div className="image-wrapper">
-                  <img
-                    alt="project Imges"
-                    src={card?.img}
-                    className="project-image"
-                  />
+                    <img
+                      alt="project Imges"
+                      src={card?.img}
+                      className="project-image"
+                    />
                   </div>
                 }
                 actions={[
@@ -196,11 +90,11 @@ const AdminExperince = () => {
                     type="primary"
                     icon={<EditOutlined />}
                     disabled={!hasSuperAdminRole()}
-                    onClick={() => {
-                      setSelectedItemEdit(card);
-                      setIsModalOpen(true);
-                      setType("edit");
-                    }}
+                    onClick={() =>
+                      navigate(`/admin/experience-form/${card._id}`, {
+                        state: { project: card },
+                      })
+                    }
                     style={{ borderRadius: 5 }}
                   >
                     Edit
@@ -219,7 +113,7 @@ const AdminExperince = () => {
               >
                 <Card.Meta
                   title={card.company}
-                  description={<ReadMoreText text={card.desc} maxLength={70} />}
+                  description={<ReadMoreText text={card?.desc} maxLength={70} />}
                 />
               </Card>
             </Col>

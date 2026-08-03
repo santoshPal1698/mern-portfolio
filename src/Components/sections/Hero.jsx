@@ -239,7 +239,6 @@ const SocialIcons = styled.div`
 const Hero = () => {
   const { loading, portfolioData } = useSelector((state) => state.root);
   const { intro } = portfolioData;
-  console.log("portfolio data", portfolioData)
   const { name, description, roles, resume, profile_url, linkedin, github } = intro;
 
   return (
@@ -247,7 +246,6 @@ const Hero = () => {
       {loading ? <Spin_loader /> : null}
       <HeroContainer>
         <HeroBg>
-
           {
             isSantoshPortfolio(portfolioData) && (
               <>

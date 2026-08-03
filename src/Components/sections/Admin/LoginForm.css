@@ -148,9 +148,8 @@
 }
 
 .auth-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 12px;
+    grid-template-columns: 1fr;
+    gap: 0;
 }
 
 .auth-form-scroll {
@@ -364,5 +363,29 @@
   .auth-panel-form {
     flex: 1;
     max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-page {
+    display: block;
+  }
+  .auth-panel-form {
+    padding: 32px 22px;
+    overflow-y: visible;
+    min-height: 100vh;
+    height: auto;
+  }
+  .auth-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .auth-form-scroll {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+  }
+  .auth-banner-title {
+    font-size: 32px;
   }
 }

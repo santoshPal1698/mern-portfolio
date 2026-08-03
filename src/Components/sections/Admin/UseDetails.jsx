@@ -1,12 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import UseDetails from "./jsonApi";
 
-/**
- * Reference solution for the interview task:
- * Fetch users from JSONPlaceholder, display in a table with
- * custom (no-library) search, sort, and pagination logic.
- */
-
 const API_URL = "https://jsonplaceholder.typicode.com/users";
 const PAGE_SIZE_OPTIONS = [5, 10, 20];
 

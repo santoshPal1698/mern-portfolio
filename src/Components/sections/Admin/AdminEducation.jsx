@@ -6,64 +6,28 @@ import { PORTFOLIOPOINTS } from "../../../Api/Endpoints";
 import { hideLoading, ReloadData, showLoading } from "../../../redux/rootSlice";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Card, Row, Col } from "antd";
-import { Modal } from "antd";
 import useConfirmationModal from "./useConfirmationModal";
-import TextArea from "antd/es/input/TextArea";
 import { hasSuperAdminRole } from "../../../services/AuthService";
 import "../Admin/css/card.css";
 import ToastService from "../../../services/toastService";
 import ReadMoreText from "./Redmore";
+import { useNavigate } from "react-router-dom";
 
 const AdminEducation = () => {
   const dispatch = useDispatch();
   const { portfolioData } = useSelector((state) => state.root);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [selectedItemEdit, setSelectedItemEdit] = React.useState(null);
-  const [type, setType] = React.useState("add");
   const { showConfirm } = useConfirmationModal();
   const [userRole, setUserRole] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const role = hasSuperAdminRole() ? "SUPER_ADMIN_SPTECH" : "GUEST";
     setUserRole(role);
   }, []);
 
-  const onFinish = async (values) => {
-    try {
-      dispatch(showLoading());
-      let response;
-      if (selectedItemEdit) {
-        response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}update-education`,
-          {
-            ...values,
-            _id: selectedItemEdit._id,
-          }
-        );
-      } else {
-        response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}add-education`,
-          values
-        );
-      }
-      setIsModalOpen(false);
-      if (response.data.success) {
-        dispatch(hideLoading());
-        dispatch(ReloadData(true));
-        ToastService.success(response.data.message);
-      } else {
-        ToastService.error(response.data.message);
-      }
-    } catch (error) {
-      dispatch(hideLoading());
-      setIsModalOpen(false);
-      ToastService.error(response.data.message);
-    }
-  };
-
   const showDeleteConfirmation = (item) => {
     showConfirm({
-      title: 'Delete Confirmation',
+      title: "Delete Confirmation",
       content: `Are you sure you want to delete "${item?.school}" with ID: ${item?._id}?`,
       onConfirm: () => deleteExperice(item?._id),
     });
@@ -72,9 +36,7 @@ const AdminEducation = () => {
   const deleteExperice = async (id) => {
     try {
       dispatch(showLoading());
-      const response = await axios.post(`${PORTFOLIOPOINTS.ApiBaseUrl}delete-education`, {
-        _id: id,
-      }
+      const response = await axios.post(`${PORTFOLIOPOINTS.ApiBaseUrl}delete-education`, { _id: id, },
       );
       dispatch(hideLoading());
       if (response.data.success) {
@@ -89,86 +51,17 @@ const AdminEducation = () => {
     }
   };
 
-
-
   return (
     <>
       <Button
         type="primary"
-          disabled={!hasSuperAdminRole()}
+        disabled={!hasSuperAdminRole()}
         icon={<PlusOutlined />}
-        onClick={() => {
-          setSelectedItemEdit(null);
-          setIsModalOpen(true);
-        }}
-        style={{ borderRadius: 5}}
+        onClick={() => navigate("/admin/education-form")}
+        style={{ borderRadius: 5 }}
       >
         Education
       </Button>
-
-      {(type == "add" || selectedItemEdit) && (
-        <Modal
-          title={selectedItemEdit ? "Edit Education" : "Add Education"}
-          open={isModalOpen}
-          footer={null}
-          onCancel={() => {
-            setIsModalOpen(false);
-            setSelectedItemEdit(null);
-          }}
-        >
-          <div>
-            <Form
-              onFinish={onFinish}
-              layout="vertical"
-              initialValues={selectedItemEdit}
-            >
-              <Form.Item name="school" label="School Clg Name"  rules={[
-             { required: true, message: "Please Enter Your School or Collage Name." } ]}>
-                <input placeholder="School Name" />
-              </Form.Item>
-
-              <Form.Item name="img" label="School/ Collage Pic"  rules={[
-             { required: true, message: "Please Enter Your School/ Collage Pic." } ]}>
-                <input placeholder="Company profile" />
-              </Form.Item>
-
-              <Form.Item name="date" label="Date"  rules={[
-             { required: true, message: "Please Enter Your Date." } ]}>
-                <input placeholder="Date" />
-              </Form.Item>
-
-              <Form.Item name="desc" label="Description"  rules={[
-             { required: true, message: "Please Enter Description." } ]}>
-                <TextArea
-                  placeholder="Enter your text here..."
-                  autoSize={{ minRows: 5, maxRows: 15 }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    resize: "none",
-                  }}
-                />
-              </Form.Item>
-
-              <Form.Item name="grade" label="Grade"  rules={[
-             { required: true, message: "Please Enter Your Grade." } ]}>
-                <input placeholder="Grade " />
-              </Form.Item>
-
-              <Form.Item name="degree" label="Education Profiles Details"  rules={[
-             { required: true, message: "Please Enter Your Education Profiles Details." } ]}>
-                <input placeholder="Degree Profile" />
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  {selectedItemEdit ? "Update" : "Add"}
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </Modal>
-      )}
 
       <div className="portfolio-container">
         <Row gutter={[16, 16]}>
@@ -178,23 +71,23 @@ const AdminEducation = () => {
                 className="project-card"
                 cover={
                   <div className="image-wrapper">
-                  <img
-                    alt="project Imges"
-                    src={card?.img}
-                    className="project-image"
-                  />
+                    <img
+                      alt="project Imges"
+                      src={card?.img}
+                      className="project-image"
+                    />
                   </div>
                 }
                 actions={[
                   <Button
                     type="primary"
-                      disabled={!hasSuperAdminRole()}
+                    disabled={!hasSuperAdminRole()}
                     icon={<EditOutlined />}
-                    onClick={() => {
-                      setSelectedItemEdit(card);
-                      setIsModalOpen(true);
-                      setType("edit");
-                    }}
+                    onClick={() =>
+                      navigate(`/admin/education-form/${card._id}`, {
+                        state: { project: card },
+                      })
+                    }
                     style={{ borderRadius: 5 }}
                   >
                     Edit

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PORTFOLIOPOINTS } from "../../../Api/Endpoints";
 import { hideLoading, ReloadData, showLoading } from "../../../redux/rootSlice";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col,Button, Form } from "antd";
 import { Modal } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import useConfirmationModal from "./useConfirmationModal";
@@ -16,49 +16,15 @@ import ReadMoreText from "./Redmore";
 
 const AdminProjects = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { portfolioData } = useSelector((state) => state.root);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [selectedItemEdit, setSelectedItemEdit] = React.useState(null);
-  const [type, setType] = React.useState("add");
   const { showConfirm } = useConfirmationModal();
   const [userRole, setUserRole] = useState(null);
-  
 
   useEffect(() => {
     const role = hasSuperAdminRole() ? "SUPER_ADMIN_SPTECH" : "GUEST";
     setUserRole(role);
   }, []);
-
-
-  const onFinish = async (values) => {
-    try {
-      dispatch(showLoading());
-      let response;
-      if (selectedItemEdit) {
-        response = await axios.post(`${PORTFOLIOPOINTS.ApiBaseUrl}update-project`,{
-            ...values,
-            _id: selectedItemEdit._id,
-          }
-        );
-      } else {
-        response = await axios.post(
-          `${PORTFOLIOPOINTS.ApiBaseUrl}add-project`,values
-        );
-      }
-      setIsModalOpen(false);
-      if (response.data.success) {
-        dispatch(hideLoading());
-        dispatch(ReloadData(true));
-        ToastService.success(response.data.message);
-      } else {
-        ToastService.error(response.data.message);
-      }
-    } catch (error) {
-      dispatch(hideLoading());
-      setIsModalOpen(false);
-      ToastService.error(error.message);
-    }
-  };
 
   const showDeleteConfirm = (item) => {
     showConfirm({
@@ -66,17 +32,14 @@ const AdminProjects = () => {
       content: `This action will permanently delete this Project:`,
       onConfirm: () => deleteExperice(item?._id),
     });
-  }
-
+  };
 
   const deleteExperice = async (id) => {
     try {
       dispatch(showLoading());
       const response = await axios.post(
         `${PORTFOLIOPOINTS.ApiBaseUrl}delete-project`,
-        {
-          _id:id,
-        }
+        { _id: id }
       );
       dispatch(hideLoading());
       if (response.data.success) {
@@ -91,141 +54,63 @@ const AdminProjects = () => {
     }
   };
 
-
-
   return (
     <>
       <Button
         type="primary"
         icon={<PlusOutlined />}
         disabled={!hasSuperAdminRole()}
-        onClick={() => {
-          setSelectedItemEdit(null);
-          setIsModalOpen(true);
-        }}
-        style={{ borderRadius:10 }}
+        onClick={() => navigate("/admin/project-form")}
+        style={{ borderRadius: 10 }}
       >
         Project
       </Button>
 
-      {(type == "add" || selectedItemEdit) && (
-        <Modal
-          title={selectedItemEdit ? "Edit Projects" : "Add Project"}
-          open={isModalOpen}
-          footer={null}
-          onCancel={() => {
-            setIsModalOpen(false);
-            setSelectedItemEdit(null);
-          }}
-        >
-          <div>
-            <Form
-              onFinish={onFinish}
-              layout="vertical"
-              initialValues={selectedItemEdit}
-            >
-              <Form.Item name="title" label="Project Title" rules={[
-             { required: true, message: "Please Enter Your Project title." } ]}>
-                <input placeholder="Project Title" />
-              </Form.Item>
-
-              <Form.Item name="image" label="Project Logo Pic" rules={[
-             { required: true, message: "Please Enter Your Logo Url." } ]}>
-                <input placeholder="Project profile" />
-              </Form.Item>
-
-              <Form.Item name="date" label="Date" rules={[
-             { required: true, message: "Please Select Your Date" }]}>
-                <input placeholder="Date" />
-              </Form.Item>
-
-              <Form.Item name="description" label="Description" rules={[
-             { required: true, message: "Please Enter Your Description." } ]}>
-                <TextArea
-                  placeholder="Enter your text here..."
-                  autoSize={{ minRows: 5, maxRows: 15 }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    resize: "none",
-                  }}
+      <div className="portfolio-container">
+        <Row gutter={[16, 16]}>
+          {portfolioData.projects.map((card, index) => (
+            <Col key={index} xs={24} sm={12} md={8} lg={6}>
+              <Card
+                hoverable
+                className="project-card"
+                cover={
+                  <div className="image-wrapper">
+                    <img alt="project" src={card?.image} className="project-image" />
+                  </div>
+                }
+                actions={[
+                  <Button
+                    type="primary"
+                    icon={<EditOutlined />}
+                    disabled={!hasSuperAdminRole()}
+                    onClick={() =>
+                    navigate(`/admin/project-form/${card._id}`, {
+                      state: { project: card },
+                    })
+                  }
+                  >
+                    Edit
+                  </Button>,
+                  <Button
+                    type="primary"
+                    danger
+                    icon={<DeleteOutlined />}
+                    disabled={!hasSuperAdminRole()}
+                    onClick={() => showDeleteConfirm(card)}
+                  >
+                    Delete
+                  </Button>,
+                ]}
+              >
+                <Card.Meta
+                  title={card.Project}
+                  description={<ReadMoreText text={card.description} maxLength={70} />}
                 />
-              </Form.Item>
-
-              <Form.Item name="github" label="Github"rules={[
-             { required: true, message: "Please Enter Your Github Url." } ]} >
-                <input placeholder="Github " />
-              </Form.Item>
-
-              <Form.Item name="webapp" label="Project Url" rules={[
-             { required: true, message: "Please Enter Your Ptoject Url." } ]}>
-                <input placeholder="Project Url" />
-              </Form.Item>
-
-              <Form.Item name="tags" label="Tags Profile" rules={[
-             { required: true, message: "Please Enter Your Tags Profile." } ]}>
-                <input placeholder="Tags Profile" />
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary" htmlType="submit" >
-                  {selectedItemEdit ? "Update" : "Add"}
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </Modal>
-      )}
-
-<div className="portfolio-container">
-  <Row gutter={[16, 16]}>
-    {portfolioData.projects.map((card, index) => (
-      <Col key={index} xs={24} sm={12} md={8} lg={6}>
-        <Card
-          hoverable
-          className="project-card"
-          cover={
-            <div className="image-wrapper">
-              <img
-                alt="project"
-                src={card?.image}
-                className="project-image"
-              />
-            </div>
-          }
-          actions={[
-            <Button
-              type="primary"
-              icon={<EditOutlined />}
-              disabled={!hasSuperAdminRole()}
-              onClick={() => {
-                setSelectedItemEdit(card);
-                setIsModalOpen(true);
-                setType("edit");
-              }}
-            >
-              Edit
-            </Button>,
-            <Button
-              type="primary"
-              danger
-              icon={<DeleteOutlined />}
-              disabled={!hasSuperAdminRole()}
-              onClick={() => showDeleteConfirm(card)}
-            >
-              Delete
-            </Button>,
-          ]}
-        >
-          <Card.Meta
-            title={card.Project}
-            description={<ReadMoreText text={card.description} maxLength={70} />}
-          />
-        </Card>
-      </Col>
-    ))}
-  </Row>
-</div>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </>
   );
 };
