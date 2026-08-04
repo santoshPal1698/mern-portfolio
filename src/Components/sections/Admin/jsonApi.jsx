@@ -84,7 +84,7 @@ function UserDetails() {
       const data = await response.json();
       setUserList(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

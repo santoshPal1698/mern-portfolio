@@ -272,7 +272,7 @@ const Login = () => {
                   <Form.Item
                     name="firstName"
                     label="First Name"
-                    rules={[{ required: true, message: "Required." }]}
+                    rules={[{ required: true, message: "First Name is Required." }]}
                   >
                     <Input className="auth-input" placeholder="First Name" />
                   </Form.Item>
@@ -280,7 +280,7 @@ const Login = () => {
                   <Form.Item
                     name="lastName"
                     label="Last Name"
-                    rules={[{ required: true, message: "Required." }]}
+                    rules={[{ required: true, message: "Last Name is Required." }]}
                   >
                     <Input className="auth-input" placeholder="Last Name" />
                   </Form.Item>
@@ -306,7 +306,7 @@ const Login = () => {
                     name="phone_Number"
                     label="Phone Number"
                     rules={[
-                      { required: true, message: "Required." },
+                      { required: true, message: "Phone Number is Required." },
                       {
                         pattern: /^[0-9]{10}$/,
                         message: "Enter a valid 10-digit number.",
@@ -323,7 +323,7 @@ const Login = () => {
                   <Form.Item
                     name="gender"
                     label="Gender"
-                    rules={[{ required: true, message: "Required." }]}
+                    rules={[{ required: true, message: "Gender is Required." }]}
                   >
                     <Select
                       className="auth-select"
@@ -347,7 +347,7 @@ const Login = () => {
                     placeholder="Select Role"
                     options={[
                       { value: "USER", label: "User" },
-                      { value: "SUPER_ADMIN_SPTECH", label: "Super Admin" },
+                      { value: "Admin", label: "Admin" },
                     ]}
                   />
                 </Form.Item>
@@ -373,7 +373,7 @@ const Login = () => {
                     label="Confirm Password"
                     dependencies={["password"]}
                     rules={[
-                      { required: true, message: "Please confirm your password." },
+                      { required: true, message: "Please Enter confirm your password." },
                       ({ getFieldValue }) => ({
                         validator(_, value) {
                           if (!value || getFieldValue("password") === value) {

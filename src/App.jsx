@@ -20,9 +20,9 @@ const App = () => {
         <DataFetcher />
         <ScrollToTopButton />
         <Suspense fallback={<Spin_loader />}>
-            <ToastContainer
+          <ToastContainer
             position="top-right"
-            autoClose={3000}
+            autoClose={1000}
             theme="dark"
             newestOnTop
             pauseOnHover

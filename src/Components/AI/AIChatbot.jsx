@@ -52,45 +52,38 @@ const FloatBtn = styled.button`
 
 const ChatWindow = styled.div`
   position: fixed;
-  bottom: 104px;
-  right: 32px;
+  right: 28px;
+  bottom: 100px;
   z-index: 9998;
-  width: 380px;
-  max-height: 600px;
-  border-radius: 20px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: #0f0f13;
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.04);
-  animation: ${fadeSlideUp} 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  width: min(520px, calc(100vw - 48px));
+  height: min(720px, calc(100vh - 140px));
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, .3);
+  border-radius: 22px;
+  background: #0b1020;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255,255,255,.04);
+  animation: ${fadeSlideUp} .28s cubic-bezier(.34, 1.56, .64, 1) forwards;
 
-
-  @media (min-width: 1024px) {
-    width: 460px;
-    max-height: 720px;
-    bottom: 110px;
-    right: 40px;
+  @media (min-width: 1280px) {
+    right: 42px;
+    bottom: 112px;
+    width: min(620px, calc(100vw - 84px));
+    height: min(780px, calc(100vh - 154px));
   }
 
-  @media (min-width: 1440px) {
-    width: 500px;
-    max-height: 780px;
+  @media (max-width: 640px) {
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: min(78vh, 680px);
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 22px 22px 0 0;
   }
-
-  @media (max-width: 480px) {
-    width: calc(100vw - 24px);
-    right: 12px;
-    bottom: 88px;
-    max-height: 70vh;
-  }
-
 `;
-
-
 
 const Header = styled.div`
   padding: 16px 20px;
@@ -376,6 +369,15 @@ const AIChatbot = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  },[]);
 
   const toggleChat = () => {
     setOpen((prev) => {

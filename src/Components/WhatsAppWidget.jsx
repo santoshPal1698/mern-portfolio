@@ -3,7 +3,6 @@ import { useEffect } from "react";
 const WhatsAppWidget = () => {
     useEffect(() => {
         const url = "https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?68064";
-
         const s = document.createElement("script");
         s.type = "text/javascript";
         s.async = true;
@@ -11,21 +10,22 @@ const WhatsAppWidget = () => {
 
         const options = {
             enabled: true,
+            autoShow: false,
             chatButtonSetting: {
                 backgroundColor: "#25d366",
                 ctaText: "",
                 borderRadius: "25",
                 marginLeft: "0",
-                marginBottom: "20",
+                marginBottom: "80",
                 marginRight: "50",
                 position: "left",
             },
             brandSetting: {
                 brandName: "SANTOSH PAL",
                 brandSubTitle: "",
-                brandImg:"https://avatars3.githubusercontent.com/u/58684635?s=460",
+                brandImg: "https://avatars3.githubusercontent.com/u/58684635?s=460",
                 welcomeText: "Hi, I am Santosh Pal",
-                messageText:"Thank you for contacting Santosh Pal! How can we help you?",
+                messageText: "Thank you for contacting Santosh Pal! How can we help you?",
                 backgroundColor: "#25d366",
                 ctaText: "Start Chat",
                 borderRadius: "25",

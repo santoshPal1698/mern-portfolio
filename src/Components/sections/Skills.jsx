@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Autoplay, Navigation, EffectCoverflow, Pagination } from "swiper/modules";
@@ -10,125 +10,166 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 
-const Title = styled.div`
-  font-size: 52px;
-  text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
+const Title = styled.h2`
+  margin: 0;
   color: ${({ theme }) => theme.text_primary};
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
-  }
-`;
-const Desc = styled.div`
-  font-size: 18px;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
   text-align: center;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_secondary};
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
 `;
 
-// Container
+const Desc = styled.p`
+  max-width: 760px;
+  margin: 14px auto 0;
+  color: ${({ theme }) => theme.text_secondary};
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 500;
+  line-height: 1.65;
+  text-align: center;
+`;
+
 export const SliderWrapper = styled.div`
   width: 100%;
-  padding: 40px 0;
+  padding: 30px 0 50px;
   position: relative;
 
   .swiper {
-    padding: 20px 40px; /* space for arrows */
+    max-width: 1180px;
+    padding: 18px 58px 50px;
   }
 
-  /* Arrow Buttons */
+  .swiper-slide {
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .swiper-pagination-bullet {
+    width: 7px;
+    height: 7px;
+    background: ${({ theme }) => theme.text_secondary};
+    opacity: .35;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 24px;
+    border-radius: 6px;
+    background: ${({ theme }) => theme.primary};
+    opacity: 1;
+  }
+
   .swiper-button-next,
   .swiper-button-prev {
-    color: ${({ theme }) => theme.text_primary};
-    background-color: ${({ theme }) => theme.bg};
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    width: 42px;
+    height: 42px;
+    border: 1px solid ${({ theme }) => `${theme.text_secondary}3d`};
+    border-radius: 12px;
+    background: ${({ theme }) => theme.bgLight};
+    color: ${({ theme }) => theme.primary};
+    box-shadow: 0 8px 20px ${({ theme }) => `${theme.black}18`};
+    transition: transform .2s ease, border-color .2s ease;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.primary};
   }
 
   .swiper-button-next::after,
   .swiper-button-prev::after {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 800;
   }
-  /* Hide arrows on mobile */
-  @media (max-width: 480px) {
-    .swiper-button-next,
-    .swiper-button-prev {
-      display: none;
-    }
+
+  @media (max-width: 640px) {
+    .swiper { padding: 12px 18px 46px; }
+    .swiper-button-next, .swiper-button-prev { display: none; }
   }
 `;
 
-// Card Wrapper (your Skill)
-export const SkillCard = styled.div`
+export const SkillCard = styled.article`
   width: 100%;
-  max-width: 500px;
-  background-color: ${({ theme }) => theme.bg};
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
-  border-radius: 16px;
-  padding: 18px 36px;
-  @media (max-width: 768px) {
-    max-width: 400px;
-    padding: 10px 36px;
+  min-height: 292px;
+  padding: 28px;
+  border: 1px solid ${({ theme }) => `${theme.text_secondary}2f`};
+  border-radius: 20px;
+  background: linear-gradient(145deg, ${({ theme }) => theme.card}, ${({ theme }) => theme.bgLight});
+  box-shadow: 0 16px 36px ${({ theme }) => `${theme.black}18`};
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+
+  &:hover {
+    transform: translateY(-7px);
+    border-color: ${({ theme }) => `${theme.primary}70`};
+    box-shadow: 0 22px 44px ${({ theme }) => `${theme.primary}22`};
   }
 
-  @media (max-width: 500px) {
-    max-width: 330px;
-    padding: 10px 36px;
+  @media (max-width: 640px) {
+    min-height: 0;
+    padding: 22px 18px;
   }
 `;
 
-// Title
 export const SkillTitle = styled.h3`
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: center;
-  color: ${({ theme }) => theme.text_secondary};
-`;
-
-// List
-export const SkillList = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
   gap: 10px;
+  margin: 0 0 22px;
+  color: ${({ theme }) => theme.text_primary};
+  font-size: clamp(21px, 3vw, 25px);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.primary};
+    box-shadow: 0 0 0 5px ${({ theme }) => `${theme.primary}18`};
+  }
 `;
 
-// Item
+export const SkillList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+
+  @media (max-width: 440px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 export const SkillItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: ${({ theme }) => theme.text_primary + 80};
-  border: 1px solid ${({ theme }) => theme.text_primary + 80};
-  border-radius: 12px;
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 14px;
+  min-width: 0;
+  gap: 10px;
+  padding: 10px 11px;
+  border: 1px solid ${({ theme }) => `${theme.text_secondary}28`};
+  border-radius: 11px;
+  background: ${({ theme }) => `${theme.bg}55`};
+  color: ${({ theme }) => theme.text_primary};
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+  transition: background .2s ease, border-color .2s ease;
 
-   @media (max-width: 768px) {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-  @media (max-width: 500px) {
-    font-size: 14px;
-    padding: 6px 12px;
+  &:hover {
+    border-color: ${({ theme }) => `${theme.primary}65`};
+    background: ${({ theme }) => `${theme.primary}12`};
   }
 `;
 
-// Image
 export const SkillImage = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  padding: 4px;
+  border-radius: 7px;
+  background: ${({ theme }) => theme.bgLight};
+  object-fit: contain;
 `;
 
 const Skills = () => {
@@ -153,7 +194,7 @@ const Skills = () => {
           centeredSlides={true}
           loop={true}
           grabCursor={true}
-          spaceBetween={20}
+          spaceBetween={30}
           // ✅ RESPONSIVE
           breakpoints={{
             0: {
@@ -188,12 +229,12 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <SwiperSlide key={index}>
               <SkillCard>
-                <SkillTitle>{skill.title}</SkillTitle>
+                <SkillTitle>{skill?.title}</SkillTitle>
 
                 <SkillList>
                   {skill.skills.map((item, index_x) => (
                     <SkillItem key={index_x}>
-                      <SkillImage src={item.image} />
+                      <SkillImage src={item?.image} />
                       {item.name}
                     </SkillItem>
                   ))}

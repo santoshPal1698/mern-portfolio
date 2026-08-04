@@ -28,25 +28,25 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 `;
-const Title = styled.div`
-  font-size: 52px;
-  text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
+
+
+const Title = styled.h2`
+  margin: 0;
   color: ${({ theme }) => theme.text_primary};
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
-  }
-`;
-const Desc = styled.div`
-  font-size: 18px;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
   text-align: center;
-  font-weight: 600;
+`;
+
+const Desc = styled.p`
+  max-width: 760px;
+  margin: 14px auto 0;
   color: ${({ theme }) => theme.text_secondary};
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 500;
+  line-height: 1.65;
+  text-align: center;
 `;
 
 const Education = () => {
