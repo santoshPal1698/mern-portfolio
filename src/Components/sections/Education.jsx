@@ -5,6 +5,7 @@ import styled from "styled-components";
 import EducationCard from "../cards/EducationCard";
 import EarthCanvas from "../canvas/Earth";
 import { useSelector } from "react-redux";
+import DataNotFound from "./DataNotFound";
 
 const Container = styled.div`
   display: flex;
@@ -65,11 +66,23 @@ const Education = () => {
           Lifelong Learner 🎓 My education has been a journey of self-discovery and growth, shaping my technical expertise and problem-solving skills.
         </Desc>
 
-        <VerticalTimeline>
-          {education.map((education, index) => (
-            <EducationCard key={index} education={education} />
-          ))}
-        </VerticalTimeline>
+                  {
+                    education.length == 0 ? (
+                      <DataNotFound
+                        message="No Education added yet"
+                        subText="Add your Education to showcase your expertise."
+                        imgWidth="40%"
+                      />
+                    ) : (
+                      <>
+                      <VerticalTimeline>
+                        {education.map((education, index) => (
+                         <EducationCard key={index} education={education} />
+                        ))}
+                     </VerticalTimeline>
+                      </>
+                    )
+                  }
         {/* <EarthCanvas /> */}
       </Wrapper>
     </Container>

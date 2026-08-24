@@ -5,7 +5,7 @@ import Skills from "./sections/Skills";
 import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
 import Education from "./sections/Education";
-// import Contact from "./sections/Contact";
+import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import { useSelector } from "react-redux";
 import Spin_loader from "./Spin-loader";

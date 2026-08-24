@@ -1,16 +1,18 @@
 import { lazy } from "react";
 const Home = lazy(() => import("../Components/Home"));
 const vihanLanding = lazy(() => import("../Components/LandingPage/Viahaantechlanding"));
+const bulkEmail = lazy(()=> import("../Components/BulkMail/ResumeOutreachForm"))
 const Admin = lazy(() => import("../Components/sections/Admin"));
 const userDashboard = lazy(() => import("../Components/sections/User/users-dashboards"));
 const userBio = lazy(() => import("../Components/sections/Admin/AdminIntro"));
-
 const User = lazy(() => import("../Components/sections/Admin/jsonApi"));
 const Login = lazy(() => import("../Components/sections/Admin/Login"));
 const Weather = lazy(() => import("../Components/Weather"));
 const PageNotFound = lazy(() => import("../Components/PageNotFound"));
 const travelers = lazy(() => import("../Components/Tour-Travels/Vihan"));
 const AdminProjects = lazy(() => import("../Components/sections/Admin/AdminProjects"));
+const interview = lazy(() => import("../Components/InterView-Guide/InterviewPrepLibrary"));
+
 const AdminProjectsForm = lazy(() => import("../Components/sections/Admin/Admin_Form/ProjectForm"));
 const AdminEducationForm = lazy(() => import("../Components/sections/Admin/Admin_Form/EducationForm"));
 const AdminExperienceForm = lazy(() => import("../Components/sections/Admin/Admin_Form/ExperienceForm"));
@@ -20,6 +22,8 @@ const allRoutes = [
   { path: "/", element: Home },
   { path: "/user/:name", element: Home },
   { path: "/vihaan", element: vihanLanding },
+  { path:"bulk-email",element:bulkEmail},
+  { path:"/interview",element:interview},
   { path: "/weather", element: Weather },
   { path: "/crud-user", element: User },
   { path: "/dv-travels", element: travelers },

@@ -4,6 +4,7 @@ import "react-vertical-timeline-component/style.min.css";
 import styled from "styled-components";
 import ExperienceCard from "../cards/ExperienceCard";
 import { useSelector } from "react-redux";
+import DataNotFound from "./DataNotFound";
 
 const Container = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ const Desc = styled.p`
 const Experience = () => {
   const { loading, portfolioData } = useSelector((state) => state.root);
   const { experience } = portfolioData;
-  
+
   return (
     <Container id="Experience">
       <Wrapper>
@@ -62,17 +63,29 @@ const Experience = () => {
             marginBottom: "40px",
           }}
         >
-         Software Engineer 💻 Experienced in working with diverse companies and projects, delivering innovative solutions across Multiple Domain
+          Software Engineer 💻 Experienced in working with diverse companies and projects, delivering innovative solutions across Multiple Domain
         </Desc>
+          {
+            experience.length == 0 ? (
+              <DataNotFound
+                message="No Experice added yet"
+                subText="Add your Experince to showcase your expertise."
+                imgWidth="40%"
+              />
 
-        <VerticalTimeline>
-          {experience.map((experience, index) => (
-            <ExperienceCard
-              key={index}
-              experience={experience}
-            />
-          ))}
-        </VerticalTimeline>
+            ) : (
+              <>
+              <VerticalTimeline>
+                {experience.map((experience, index) => (
+                  <ExperienceCard
+                    key={index}
+                    experience={experience}
+                  />
+                ))}
+             </VerticalTimeline>
+              </>
+            )
+          }
       </Wrapper>
     </Container>
   );

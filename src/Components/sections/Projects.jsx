@@ -4,6 +4,7 @@ import { baseLiveProject } from "../../data/constants";
 import ProjectCard from "../cards/ProjectCard";
 import { useSelector } from "react-redux";
 import { isSantoshPortfolio } from "../../services/AuthService";
+import DataNotFound from "./DataNotFound";
 
 const Container = styled.div`
   display: flex;
@@ -134,15 +135,27 @@ const Projects = () => {
           Unify, GCON, Naukari Job Portal, and E-commerce platforms
         </Desc>
 
-        <CardContainer>
-          {toggle === "all" &&
-            projects.map((project) => <ProjectCard project={project} />)}
-          {projects
-            .filter((item) => item.category === toggle)
-            .map((project) => (
-              <ProjectCard project={project} />
-            ))}
-        </CardContainer>
+          {
+            projects.length == 0 ? (
+              <DataNotFound
+                message="No Project added Yet"
+                subText="Add your Project to showcase your expertise."
+                imgWidth="40%"
+              />
+
+            ) : (
+              <>
+               <CardContainer>
+                {projects.map((project, index) => (
+                  <ProjectCard
+                    key={index}
+                    project={project}
+                  />
+                ))}
+              </CardContainer>
+              </>
+            )
+          }
       </Wrapper>
     </Container>
   );

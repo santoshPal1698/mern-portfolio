@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled, { keyframes } from "styled-components";
 import Typewriter from "typewriter-effect";
 import HeroBgAnimation from "../HeroBgAnimation";
-import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
-import {
-  headContainerAnimation,
-  headContentAnimation,
-  headTextAnimation,
-} from "../../utils/motion";
+import { headContainerAnimation,headContentAnimation,headTextAnimation} from "../../utils/motion";
 import StarCanvas from "../canvas/Stars";
 import { useSelector } from "react-redux";
 import Spin_loader from "../Spin-loader";
@@ -18,6 +13,12 @@ import WorkIcon from "@mui/icons-material/Work";
 import DownloadIcon from "@mui/icons-material/Download";
 import { isSantoshPortfolio } from "../../services/AuthService";
 import ReadMoreText from "../sections/Admin/Redmore";
+import AnimatedProfile from "./AnimatedProfile ";
+
+const pulse = keyframes`
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50% { opacity: .85; transform: scale(1.06); }
+`;
 
 const SocialLink = styled.a`
   width: 46px;
@@ -30,8 +31,14 @@ const SocialLink = styled.a`
   background: ${({ theme }) => `${theme.bg}8c`};
   color: ${({ theme }) => theme.text_primary};
   backdrop-filter: blur(10px);
-  transition: transform .25s ease, border-color .25s ease, background .25s ease, color .25s ease;
-  svg { font-size: 21px; }
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+  svg {
+    font-size: 21px;
+  }
   &:hover {
     transform: translateY(-5px);
     border-color: ${({ theme }) => theme.primary};
@@ -49,26 +56,41 @@ const HeroContainer = styled.div`
   padding: clamp(64px, 8vw, 110px) 30px;
   z-index: 1;
 
-  &::before, &::after {
+  &::before,
+  &::after {
     content: "";
     position: absolute;
     z-index: -1;
     border-radius: 50%;
     pointer-events: none;
     filter: blur(18px);
+    animation: ${pulse} 9s ease-in-out infinite;
   }
   &::before {
-    width: 42vw; height: 42vw; min-width: 320px; min-height: 320px;
-    top: -28vw; left: -14vw;
+    width: 42vw;
+    height: 42vw;
+    min-width: 320px;
+    min-height: 320px;
+    top: -28vw;
+    left: -14vw;
     background: ${({ theme }) => `${theme.primary}26`};
   }
   &::after {
-    width: 34vw; height: 34vw; min-width: 260px; min-height: 260px;
-    bottom: -25vw; right: -10vw;
+    width: 34vw;
+    height: 34vw;
+    min-width: 260px;
+    min-height: 260px;
+    bottom: -25vw;
+    right: -10vw;
     background: ${({ theme }) => `${theme.primary}20`};
+    animation-delay: 3s;
   }
-  @media (max-width: 960px) { padding: 66px 16px; }
-  @media (max-width: 640px) { padding: 42px 16px 58px; }
+  @media (max-width: 960px) {
+    padding: 66px 16px;
+  }
+  @media (max-width: 640px) {
+    padding: 42px 16px 58px;
+  }
 `;
 
 const HeroInnerContainer = styled.div`
@@ -94,8 +116,12 @@ const HeroLeftContainer = styled.div`
   position: relative;
   z-index: 1;
   @media (max-width: 960px) {
-    order: 2; margin-bottom: 0; display: flex; gap: 8px;
-    flex-direction: column; align-items: center;
+    order: 2;
+    margin-bottom: 0;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -107,7 +133,10 @@ const HeroRightContainer = styled.div`
   position: relative;
   z-index: 1;
   @media (max-width: 960px) {
-    order: 1; align-items: center; justify-content: center; margin-bottom: 0;
+    order: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
   }
 `;
 
@@ -125,10 +154,14 @@ const Title = styled.div`
     color: ${({ theme }) => theme.primary};
     font-size: 12px;
     font-weight: 800;
-    letter-spacing: .12em;
+    letter-spacing: 0.12em;
   }
-  @media (max-width: 960px) { text-align: center; }
-  @media (max-width: 640px) { font-size: 42px; }
+  @media (max-width: 960px) {
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    font-size: 42px;
+  }
 `;
 
 const TextLoop = styled.div`
@@ -140,7 +173,9 @@ const TextLoop = styled.div`
   font-size: clamp(21px, 2.7vw, 30px);
   font-weight: 650;
   line-height: 1.35;
-  @media (max-width: 960px) { justify-content: center; }
+  @media (max-width: 960px) {
+    justify-content: center;
+  }
 `;
 
 const Span = styled.div`
@@ -153,8 +188,13 @@ const SubTitle = styled.div`
   color: ${({ theme }) => theme.text_secondary};
   font-size: 17px;
   line-height: 1.8;
-  @media (max-width: 960px) { text-align: center; }
-  @media (max-width: 640px) { font-size: 15px; line-height: 1.7; }
+  @media (max-width: 960px) {
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    font-size: 15px;
+    line-height: 1.7;
+  }
 `;
 
 const ResumeButton = styled.a`
@@ -171,27 +211,18 @@ const ResumeButton = styled.a`
   text-decoration: none;
   font-weight: 750;
   font-size: 15px;
-  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-  svg { font-size: 20px; }
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+  svg {
+    font-size: 20px;
+  }
   &:hover {
     transform: translateY(-4px);
     box-shadow: ${({ theme }) => theme.buttonShadowHover};
     filter: brightness(1.08);
   }
-`;
-
-const Img = styled.img`
-  display: block;
-  width: 100%;
-  max-width: 380px;
-  aspect-ratio: 1;
-  border: 10px solid transparent;
-  border-radius: 32px;
-  outline: 1px solid ${({ theme }) => `${theme.white}55`};
-  background: ${({ theme }) => theme.button};
-  object-fit: cover;
-  box-shadow: 0 25px 55px ${({ theme }) => `${theme.primary}3d`};
-  @media (max-width: 640px) { max-width: 280px; border-width: 7px; border-radius: 25px; }
 `;
 
 const HeroBg = styled.div`
@@ -206,8 +237,10 @@ const SocialIcons = styled.div`
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 24px;
-  @media (max-width: 960px) { justify-content: center; }
+  margin-top: 80px;
+  @media (max-width: 960px) {
+    justify-content: center;
+  }
 `;
 
 const Hero = () => {
@@ -220,15 +253,12 @@ const Hero = () => {
       {loading ? <Spin_loader /> : null}
       <HeroContainer>
         <HeroBg>
-          {
-            isSantoshPortfolio(portfolioData) && (
-              <>
-                <StarCanvas />
-                <HeroBgAnimation />
-              </>
-            )
-          }
-
+          {isSantoshPortfolio(portfolioData) && (
+            <>
+              <StarCanvas />
+              <HeroBgAnimation />
+            </>
+          )}
         </HeroBg>
         <motion.div {...headContainerAnimation}>
           <HeroInnerContainer>
@@ -251,9 +281,9 @@ const Hero = () => {
               </motion.div>
 
               <motion.div {...headContentAnimation}>
-                <SubTitle> 
+                <SubTitle>
                   <ReadMoreText text={description} maxLength={380} />
-                  </SubTitle>
+                </SubTitle>
               </motion.div>
 
               <ResumeButton href={resume} target="_blank">
@@ -263,11 +293,7 @@ const Hero = () => {
 
             <HeroRightContainer>
               <motion.div {...headContentAnimation}>
-                <Tilt tiltMaxAngleX={25} tiltMaxAngleY={25}
-                  scale={1.05} transitionSpeed={3000} glareEnable={true} glareMaxOpacity={0.45}>
-                  <Img src={profile_url} alt="Santosh Pal" />
-                </Tilt>
-
+                <AnimatedProfile profile_url={profile_url} />
                 <SocialIcons>
                   <SocialLink
                     href={linkedin}
@@ -285,11 +311,7 @@ const Hero = () => {
                     <WorkIcon />
                   </SocialLink>
 
-                  <SocialLink
-                    href={github}
-                    target="_blank"
-                    aria-label="GitHub"
-                  >
+                  <SocialLink href={github} target="_blank" aria-label="GitHub">
                     <GitHubIcon />
                   </SocialLink>
 
@@ -305,7 +327,6 @@ const Hero = () => {
           </HeroInnerContainer>
         </motion.div>
       </HeroContainer>
-
     </div>
   );
 };

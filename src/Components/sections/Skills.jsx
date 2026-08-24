@@ -8,6 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
+import DataNotFound from "./DataNotFound";
 
 
 const Title = styled.h2`
@@ -226,6 +227,14 @@ const Skills = () => {
           }}
           modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
         >
+    {skills.length === 0 ? (
+        <DataNotFound
+          message="No skills added yet"
+          subText="Add your skills to showcase your expertise."
+          imgWidth= "40%"
+        />
+      ) : (
+        <>
           {skills.map((skill, index) => (
             <SwiperSlide key={index}>
               <SkillCard>
@@ -242,6 +251,10 @@ const Skills = () => {
               </SkillCard>
             </SwiperSlide>
           ))}
+        </>
+      )}
+
+
         </Swiper>
       </SliderWrapper>
     </>

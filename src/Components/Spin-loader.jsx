@@ -25,7 +25,7 @@ const Spin_loader = ({ visible = true, fullScreen = true }) => {
         width="50%"
         ariaLabel="hourglass-loading"
         wrapperClass="vortex-wrapper"
-       colors={['#6a11cb', '#fff', '#6a11cb', '#fff', '#6a11cb']}
+        colors={['#111111', '#FFFF', '#333333', '#FFFFFF', '#111111']}
       />
     </div>
   );

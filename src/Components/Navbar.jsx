@@ -7,6 +7,7 @@ import NightlightIcon from '@mui/icons-material/Nightlight';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 
+
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
   height: 80px;
@@ -186,6 +187,8 @@ const Navbar = ({ theme, toggleThemeControl }) => {
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
           <NavLink href="#Education">Education</NavLink>
+          {/* <LinkR to="/interview">Interview</LinkR> */}
+
         </NavItems>
 
         {isOpen && (
