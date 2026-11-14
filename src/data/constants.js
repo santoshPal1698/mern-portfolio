@@ -365,8 +365,7 @@ export const baseLiveProject = [
   { name: 'React js Movie', url: 'https://sptechreact.netlify.app/movie' },
   { name: 'Dv Tour Travels', url: 'https://santosh-pal.netlify.app/dv-travels' },
   { name: 'Vihaan Tech', url: 'https://santosh-pal.netlify.app/vihaan' },
+  { name: 'SP-Insta', url: 'https://spinsta.onrender.com/social/login/' },
   // { name: 'Angular 20', url: 'https://sptechguru.github.io/Angular18/login' },
-  // { name: 'E-commerce', url: 'https://onlineguru.pythonanywhere.com/shop/' },
-  // { name: 'Old-portfolio', url: 'https://sani.pythonanywhere.com/' }
 ];
 
