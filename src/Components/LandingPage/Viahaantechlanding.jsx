@@ -123,11 +123,11 @@ export default function App() {
         <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
           <HBadge><Pip /> Open for Freelance Projects — India & Worldwide</HBadge>
           <HName>SANTOSH PAL</HName>
-          <HRole>Freelance <span>{typed}<span className="cur">|</span></span></HRole>
+          <HRole><span>Freelance {typed}<span className="cur">|</span></span></HRole>
           <HDesc>
-            I help <strong>startups, agencies & businesses</strong> build high-performance
-            web apps, AI-powered platforms and scalable cloud architectures.
-            <br />React · Angular · Node.js · Python · AWS · Generative AI
+            I help <strong>startups, agencies & businesses</strong> design and build
+            production-ready web applications, intelligent AI systems and scalable cloud solutions.
+            <br />Full Stack Development · Python · Generative AI · Agentic AI · AWS
           </HDesc>
           <HBtns>
             <BtnGrad onClick={() => go("contact")}>💼 Hire Me Now</BtnGrad>
@@ -189,22 +189,23 @@ export default function App() {
             </AvatarBox>
             <div>
               <SLabel>Who I Am</SLabel>
-              <STitle>About <span>Me</span></STitle>
+              <STitle>Full Stack Developer <span>& Python AI Engineer</span></STitle>
               <Bar />
               <SSub style={{ marginTop: 16, marginBottom: 24 }}>
-                I'm <strong style={{ color: "#f1f5f9" }}>Santosh Pal</strong>, a freelance Full Stack Developer
-                with 5+ years of experience delivering React, Angular, Node.js, Python, AWS and AI-powered
-                solutions for clients across India and globally.
+                I'm <strong style={{ color: "#f1f5f9" }}>Santosh Pal</strong>, a freelance
+                <strong style={{ color: "#67e8f9" }}> Full Stack Developer and Python AI Engineer</strong>
+                with 5+ years of experience building modern React and Angular applications, robust
+                Python backends, Generative AI solutions and cloud-native products for clients worldwide.
               </SSub>
               <InfoGrid>
                 {[
                   { e: "👤", l: "Name", v: "Santosh Pal" },
-                  { e: "💼", l: "Role", v: "Freelance Developer" },
+                  { e: "💼", l: "Role", v: "Freelance AI Engineer" },
                   { e: "🏢", l: "Brand", v: "Vihaan Tech" },
                   { e: "📞", l: "Phone/WhatsApp", v: "+91 8839102688" },
                   { e: "📧", l: "Email", v: "santoshpal9816@gmail.com" },
                   { e: "🌐", l: "Portfolio", v: "Santosh Pal" },
-                  { e: "🤖", l: "Speciality", v: "React · Angular · AI" },
+                  { e: "🤖", l: "Speciality", v: "Full Stack · Python · AI" },
                   { e: "✅", l: "Availability", v: "Open for Projects" },
                 ].map(i => (
                   <ICard key={i.l}>
@@ -214,7 +215,7 @@ export default function App() {
                 ))}
               </InfoGrid>
               <div style={{ marginTop: 26, display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <BtnGrad  onClick={() => go("portfolio")}>View Portfolio ↗</BtnGrad>
+                <BtnGrad  href="/user/santosh" target="_blank">View Portfolio ↗</BtnGrad>
                 <BtnGhost onClick={() => go("contact")}>Hire Me →</BtnGhost>
               </div>
             </div>

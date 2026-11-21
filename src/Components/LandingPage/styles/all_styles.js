@@ -46,6 +46,12 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb  { background:${p => p.theme.indigo}; border-radius:4px }
   ::selection                { background:rgba(99,102,241,.3); color:#fff }
   a                          { text-decoration:none; color:inherit }
+  #about {
+    background:
+      radial-gradient(circle at 12% 20%, rgba(34,211,238,.08), transparent 24rem),
+      radial-gradient(circle at 88% 75%, rgba(139,92,246,.08), transparent 28rem),
+      ${p => p.theme.bg2};
+  }
 `;
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -215,9 +221,10 @@ export const HeroWrap = styled.section`
 export const HeroBg = styled.div`
   position:absolute; inset:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 90% 70% at 50% -5%, rgba(99,102,241,.18) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 45% at 90% 90%, rgba(34,211,238,.12) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 40% at 5%  80%, rgba(245,158,11,.08) 0%, transparent 60%);
+    radial-gradient(ellipse 75% 58% at 50% -8%, rgba(56,189,248,.16) 0%, transparent 68%),
+    radial-gradient(ellipse 48% 42% at 92% 78%, rgba(139,92,246,.16) 0%, transparent 62%),
+    radial-gradient(ellipse 42% 38% at 5% 72%, rgba(16,185,129,.08) 0%, transparent 60%),
+    linear-gradient(145deg,#060912 0%,#09111d 58%,#080b16 100%);
 `;
 
 export const GridBg = styled.div`
@@ -231,9 +238,9 @@ export const GridBg = styled.div`
 export const HBadge = styled.div`
   display:inline-flex; align-items:center; gap:8px;
   padding:6px 18px; border-radius:100px; margin-bottom:24px;
-  background:rgba(99,102,241,.08); border:1px solid rgba(99,102,241,.3);
+  background:rgba(34,211,238,.07); border:1px solid rgba(34,211,238,.28);
   font-family:'Fira Code',monospace; font-size:11px;
-  color:${p => p.theme.indigo}; letter-spacing:2px;
+  color:${p => p.theme.cyan}; letter-spacing:2px;
   animation:${fadeUp} .7s ease both;
 `;
 
@@ -247,7 +254,7 @@ export const HName = styled.h1`
   font-family:'Exo 2',sans-serif;
   font-size:clamp(3rem,9vw,7.5rem);
   font-weight:900; line-height:.95; letter-spacing:-2px; margin-bottom:18px;
-  background:linear-gradient(135deg,#fff 20%,${p => p.theme.indigo} 55%,${p => p.theme.cyan} 100%);
+  background:linear-gradient(135deg,#fff 18%,#67e8f9 52%,#a78bfa 78%,#fff 100%);
   background-size:200% auto;
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   animation:${fadeUp} .7s .1s ease both, ${shimmer} 5s 1s linear infinite;
@@ -258,7 +265,8 @@ export const HRole = styled.div`
   font-weight:700; color:${p => p.theme.muted}; letter-spacing:3px; text-transform:uppercase;
   margin-bottom:18px;
   animation:${fadeUp} .7s .2s ease both;
-  span { color:${p => p.theme.cyan} }
+  span { color:${p => p.theme.cyan}; text-transform:none }
+  & > span { text-transform:uppercase }
 `;
 
 export const TypeWrap = styled.div`
@@ -273,7 +281,7 @@ export const HDesc = styled.p`
   max-width:620px; margin:0 auto 38px;
   font-size:1.05rem; color:${p => p.theme.muted}; line-height:1.8;
   animation:${fadeUp} .7s .35s ease both;
-  strong { color:${p => p.theme.white} }
+  strong { color:#dbeafe }
 `;
 
 export const HBtns = styled.div`
@@ -283,7 +291,8 @@ export const HBtns = styled.div`
 
 export const BtnGrad = styled.a`
   padding:14px 34px; border-radius:10px; cursor:pointer;
-  background:${p => p.theme.grad1}; color:#fff;
+  background:linear-gradient(135deg,#0891b2 0%,#6366f1 55%,#8b5cf6 100%); color:#fff;
+  box-shadow:0 12px 32px rgba(79,70,229,.24);
   font-family:'Exo 2',sans-serif; font-weight:700; font-size:13px; letter-spacing:1.5px;
   transition:all .3s; animation:${glowPulse} 4s ease infinite;
   &:hover { transform:translateY(-3px); filter:brightness(1.12) }
@@ -291,13 +300,13 @@ export const BtnGrad = styled.a`
 
 export const BtnGhost = styled.a`
   padding:13px 34px; border-radius:10px; cursor:pointer;
-  border:1.5px solid rgba(99,102,241,.4); background:rgba(99,102,241,.06);
-  color:${p => p.theme.indigo};
+  border:1.5px solid rgba(34,211,238,.32); background:rgba(34,211,238,.055);
+  color:${p => p.theme.cyan};
   font-family:'Exo 2',sans-serif; font-weight:700; font-size:13px; letter-spacing:1.5px;
   transition:all .3s;
   &:hover {
-    border-color:${p => p.theme.indigo};
-    background:rgba(99,102,241,.14);
+    border-color:${p => p.theme.cyan};
+    background:rgba(34,211,238,.12);
     transform:translateY(-3px);
   }
 `;
@@ -309,7 +318,8 @@ export const StatsRow = styled.div`
 
 export const StatPill = styled.div`
   padding:18px 28px; border-radius:14px; text-align:center;
-  background:rgba(255,255,255,.03); border:1px solid rgba(99,102,241,.18);
+  background:rgba(11,20,35,.82); border:1px solid rgba(34,211,238,.16);
+  box-shadow:0 10px 30px rgba(2,6,23,.18);
   backdrop-filter:blur(12px);
   animation:${float} ${p => p.$d || "3.5s"} ease-in-out infinite;
   transition:border-color .3s;
@@ -377,19 +387,23 @@ export const AvatarBox = styled.div`
 
 export const AvatarRing = styled.div`
   width:260px; height:260px; border-radius:50%;
-  padding:3px; background:${p => p.theme.grad1};
-  animation:${spin} 10s linear infinite;
+  padding:3px;
+  background:linear-gradient(135deg,#22d3ee 0%,#6366f1 55%,#a78bfa 100%);
+  box-shadow:0 24px 70px rgba(34,211,238,.12),0 0 0 14px rgba(34,211,238,.025);
+  animation:${glowPulse} 4s ease-in-out infinite;
   @media(max-width:500px){ width:200px; height:200px }
 `;
 
 export const AvatarCore = styled.div`
   width:100%; height:100%; border-radius:50%;
-  background:${p => p.theme.bg3};
+  background:
+    radial-gradient(circle at 35% 28%,rgba(34,211,238,.22),transparent 28%),
+    linear-gradient(145deg,#10182a,#090d18);
   display:flex; align-items:center; justify-content:center;
   font-family:'Exo 2',sans-serif; font-weight:900;
   font-size:clamp(2.5rem,5vw,3.8rem);
-  color:${p => p.theme.indigo};
-  animation:${spin} 10s linear infinite reverse;
+  color:#67e8f9;
+  text-shadow:0 0 24px rgba(34,211,238,.28);
 `;
 
 export const InfoGrid = styled.div`
@@ -399,7 +413,7 @@ export const InfoGrid = styled.div`
 
 export const ICard = styled.div`
   padding:14px 16px; border-radius:10px;
-  background:${p => p.theme.surface}; border:1px solid rgba(99,102,241,.15);
+  background:rgba(12,20,35,.72); border:1px solid rgba(34,211,238,.10);
   display:flex; gap:10px; align-items:flex-start;
   transition:border-color .3s; animation:${borderAnim} 4s ease infinite;
   &:hover { border-color:rgba(34,211,238,.4) }

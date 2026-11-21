@@ -99,10 +99,10 @@ export const tickerItems = [
 ═══════════════════════════════════════════════════════════════════ */
 export const roles = [
   "Full Stack Developer",
-  "Angular Expert",
-  "React JS Developer",
-  "MEAN & MERN Stack Developer",
-  "Generative AI Builder",
-  "Microservices Architect",
-  "AWS Cloud Developer",
+  "Python AI Engineer",
+  "AI Application Developer",
+  "React & Angular Developer",
+  "MERN / MEAN Stack Developer",
+  "Generative AI Engineer",
+  "Agentic AI Builder",
 ];
